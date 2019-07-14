@@ -11,7 +11,7 @@ public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
         String tempUser = "user";
-        String tempPass = "password";
+        String tempPass = "pass";
 
         if(username.equals(tempUser) && password.equals(tempPass))
         {
