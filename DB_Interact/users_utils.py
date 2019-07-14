@@ -48,9 +48,15 @@ class User:
         s = "id: "+self.id + "\nName: "+self.name + "\nNickname: "+self.nickname + "\nDescription: "+self.desc + "\nType: "+self.type
         return s
 
-    def update(self, name=None, nickname=None, birth=None, desc=None,
+    def update(self, connection, name=None, nickname=None, birth=None, desc=None,
                type=None, pw=None, email=None, onboard=None):
-        pass
+        if desc is not None:
+            change_query = "update users set description='{0}' where id='{1}'".format(desc, self.id)
+            self.desc = desc
+            connection.cursor.execute(change_query)
+            print("INFO: Updated description for user: " + self.name + " to " + self.desc)
+        connection.connection.commit()
+
 
 
 def dump_all_user_info(connection):
@@ -69,8 +75,7 @@ def new_user(connection, name, nickname, description, birth, email, password, ki
     add_query = "INSERT INTO users(id,name,nickname,description,birth,email,password,onboard,type) VALUES " \
                 "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')"\
                 .format(uid, name, nickname, description, str(birth), email, password, str(onboard), kind)
-    print(add_query)
     connection.cursor.execute(add_query)
     connection.connection.commit()
-    print("ADDED USER: \n")
+    print("ADDED USER:")
     print(User(connection, nickname=nickname, password=password))
