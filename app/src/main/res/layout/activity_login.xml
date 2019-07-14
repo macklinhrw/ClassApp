@@ -58,8 +58,9 @@
         android:layout_marginBottom="200dp"
         android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:enabled="false"
+        android:password="false"
         android:text="@string/action_sign_in"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/creditsText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -80,7 +81,7 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/creditsText"
         android:layout_width="wrap_content"
         android:layout_height="39dp"
         android:layout_marginStart="80dp"
