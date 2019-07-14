@@ -1,7 +1,8 @@
-# Project
+# ClassNote
 
-Macklin Reeve-Wilson
+An application for student communication
 
-Eli Gilbert
+Macklin Reeve-Wilson --- User Interface and Android App Development
 
-App Development
+Eli Gilbert --- MySQL and Data System Architecture
+
