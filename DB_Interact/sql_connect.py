@@ -4,10 +4,14 @@ from mysql.connector import Error
 class ConnectMySQL:
     def __init__(self):
         try:
-            self.connection = mysql.connector.connect(host='localhost',
+            # self.connection = mysql.connector.connect(host='localhost',
+            #             #                                           database='classnote',
+            #             #                                           user='root',
+            #             #                                           password='rootpass')
+            self.connection = mysql.connector.connect(host='localhost', ### TODO make this accessible from any ip
                                                       database='classnote',
-                                                      user='root',
-                                                      password='rootpass')
+                                                      user='classnotesqlclient',
+                                                      password='38PNvDxa5RbTkr89')
             if self.connection.is_connected():
                 self.cursor = self.connection.cursor(buffered=True, dictionary=True)
                 self.cursor.execute("select database();")
