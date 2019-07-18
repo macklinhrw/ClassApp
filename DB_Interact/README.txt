@@ -10,15 +10,23 @@ SCHOOLS: id: (S+5 nums), name (max 50), description (max 200), location (max 50)
 
 
 =======COMMAND LINE COMMANDS=======
-You can use several commands per line, but only one with -params per line
-!login: log in as user
+***You can use several commands per line except:
+    >update must have its own line
+    >addclass and enterclass cannot be on the same line
 !newuser: starts make new user flow, will need to log in after
-!update: update user info. params:
+!login: log in as user (asks for credentials). for testing, use billybob/pass (student) or rudy/pass (admin)
+!easy: logs in as elig. do not use this if you are not Eli please (use billybob or rudy)
+!update: update user info pass fields to be updated as -field. Currently works with:
     -description
-!quit: obvious
-!addclass: -C##### to specify class, adds active user to class
-!easy: logs in as elig
+    -name
 !dUser: dumps active user info
+!addclass: -C##### to specify class, adds active user to class
+!enterclass: -C##### to specify class, selects class as active
+!dClass: dumps active class info
+!dAll: dumps class and user info
+!quit: obvious
+
+
 
 
 ==========CLASSES==========

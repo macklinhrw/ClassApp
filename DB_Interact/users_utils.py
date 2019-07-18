@@ -32,9 +32,9 @@ class User:
 
     def __repr__(self):
         s = "id: "+self.id + \
-            "\nName: "+self.name + \
+            "\nName: "+str(self.name) + \
             "\nNickname: "+self.nickname + \
-            "\nDescription: "+self.desc + \
+            "\nDescription: "+str(self.desc) + \
             "\nType: "+self.type
         return s
 
@@ -45,6 +45,12 @@ class User:
             self.desc = desc
             connection.cursor.execute(change_query)
             print("INFO: Updated description for user: " + self.name + " to " + self.desc)
+        if name is not None:
+            change_query = "update users set name='{0}' where id='{1}'".format(name, self.id)
+            print("INFO: Updated name for user: " + self.id + " from " + self.name + " to " + name)
+            self.name = name
+            connection.cursor.execute(change_query)
+
         # TODO add copy of lines 53-57 for all params to update
         connection.connection.commit()
 
@@ -63,11 +69,8 @@ class User:
 
 class Class:
     def __init__(self, connection, cid):
-        print(cid)
         connection.cursor.execute("select * from classes where id='%s'" % cid)
         sql_resp_a = connection.cursor.fetchall()
-        print(sql_resp_a)
-        print(len(sql_resp_a))
         sql_resp = sql_resp_a[0]
         self.id = sql_resp['id']
         self.members = sql_resp['members']
@@ -77,9 +80,17 @@ class Class:
         self.period = sql_resp['period']
         self.school = sql_resp['school']
 
+    def __repr__(self):
+        s = "id: "+self.id + \
+            "\nDescription: "+self.description + \
+            "\nTeacher: "+self.teacher + \
+            "\nPeriod: "+self.period + \
+            "\nSchool: "+self.school + \
+            "\nType: "+self.type
+        return s
+
     def add_student(self, connection, user):
         current_members = self.members
-        print(self.members)
         if user.id not in current_members:
             print(self.id)
             new_mem = current_members + user.id + ";"
