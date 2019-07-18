@@ -1,21 +1,8 @@
 import random
 import datetime
-
+import time
 
 class User:
-    def wrong_creds(self):
-        print("Incorrect username or password.")
-        self.id = ''
-        self.name = ''
-        self.nickname = ''
-        self.birth = ''
-        self.desc = ''
-        self.type = ''
-        self.pw = ''
-        self.email = ''
-        self.onboard = ''
-
-
     def __init__(self, connection, nickname=None, uid=None, password=None):
         """
         :param connection: ConnectMySQL type class object
@@ -43,9 +30,12 @@ class User:
         else:
             self.wrong_creds()
 
-
     def __repr__(self):
-        s = "id: "+self.id + "\nName: "+self.name + "\nNickname: "+self.nickname + "\nDescription: "+self.desc + "\nType: "+self.type
+        s = "id: "+self.id + \
+            "\nName: "+self.name + \
+            "\nNickname: "+self.nickname + \
+            "\nDescription: "+self.desc + \
+            "\nType: "+self.type
         return s
 
     def update(self, connection, name=None, nickname=None, birth=None, desc=None,
@@ -55,8 +45,52 @@ class User:
             self.desc = desc
             connection.cursor.execute(change_query)
             print("INFO: Updated description for user: " + self.name + " to " + self.desc)
+        # TODO add copy of lines 53-57 for all params to update
         connection.connection.commit()
 
+    def wrong_creds(self):
+        print("Incorrect username or password.")
+        self.id = ''
+        self.name = ''
+        self.nickname = ''
+        self.birth = ''
+        self.desc = ''
+        self.type = ''
+        self.pw = ''
+        self.email = ''
+        self.onboard = ''
+
+
+class Class:
+    def __init__(self, connection, cid):
+        print(cid)
+        connection.cursor.execute("select * from classes where id='%s'" % cid)
+        sql_resp_a = connection.cursor.fetchall()
+        print(sql_resp_a)
+        print(len(sql_resp_a))
+        sql_resp = sql_resp_a[0]
+        self.id = sql_resp['id']
+        self.members = sql_resp['members']
+        self.type = sql_resp['type']
+        self.description = sql_resp['description']
+        self.teacher = sql_resp['teacher']
+        self.period = sql_resp['period']
+        self.school = sql_resp['school']
+
+    def add_student(self, connection, user):
+        current_members = self.members
+        print(self.members)
+        if user.id not in current_members:
+            print(self.id)
+            new_mem = current_members + user.id + ";"
+            print(new_mem)
+            add_query = "UPDATE classes SET members='{0}' WHERE id='{1}'".format(new_mem, self.id)
+            connection.cursor.execute(add_query)
+            connection.connection.commit()
+            self.members = new_mem
+            print("Added " + user.nickname + " to class " + self.id)
+        else:
+            print(user.nickname + " was already in class " + self.id)
 
 
 def dump_all_user_info(connection):
@@ -69,6 +103,7 @@ def dump_all_user_info(connection):
 
 
 def new_user(connection, name, nickname, description, birth, email, password, kind):
+    random.seed(time.time())
     uid = "U" + str(random.randint(1000000000, 9999999999))
     now = datetime.datetime.now()
     onboard = now.strftime("%Y-%m-%d")
