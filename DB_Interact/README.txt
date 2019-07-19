@@ -28,10 +28,10 @@ congratulations! you set up basic texting! read the rest of the docs for more in
 
 ========TABLES=========
 USERS: id (U+10 numbers, capacity to expand to 20), name (full), nickname (for login), description (limit 200 chars), birth (date), email, password, onboard (date), type (admin, student, teacher)
-CLASSES: id (C+5 numbers, capacity to expand to 20), members, type, description, teacher, period, school
+CLASSES: id (C+5 numbers, capacity to expand to 20), members, type, description, teacher, section, school
 CHAT_THREADS: id (T+20 nums), members (uid separated by ;), type (direct, group, all), description, group_name, in_class (cid)
-MESSAGES: id: (M+50 nums), sender (user.id), thread (chat_threads.id), datetime, text, rank (new, old)
-SCHOOLS: id: (S+5 nums), name (max 50), description (max 200), location (max 50)
+MESSAGES: id: (M+50 nums), sender (user.id), thread (chat_threads.id), datetime, text, rank (not in use)
+SCHOOLS: id: (S+5 nums), name (max 50), description (max 255), location (max 50)
 
 
 =======ALL COMMANDS=======
@@ -56,6 +56,9 @@ RUN: python DB_Interact/users_testing.py to use these
 !m: several message inputs
 .m: one message input
 !addtothread: add another user to the active thread
+!newdm -user: starts a dm track with -user
+!dm -user: selects dm track with user - as active thread
+!newthread: enters prompt sequence for new group chat
 !quit: obvious
 
 

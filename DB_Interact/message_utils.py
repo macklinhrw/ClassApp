@@ -2,10 +2,11 @@ import random
 import time
 
 class Thread:
-    def __init__(self, connection, title):
+    def __init__(self, connection, title, mute=False):
+        #TODO eventually merge this over to select by id, currently uses group_name for simplicity
         connection.cursor.execute("select * from chat_threads where group_name='{0}'".format(title))
         sql_fa = connection.cursor.fetchall()
-        if len(sql_fa)>0:
+        if len(sql_fa) > 0:
             sql = sql_fa[0]
             self.id = sql['id']
             self.members = sql['members']
@@ -14,7 +15,8 @@ class Thread:
             self.group_name = sql['group_name']
             self.in_class = sql['in_class']
         else:
-            print("ERROR: Thread did not exist.")
+            if not mute:
+                print("ERROR: Thread did not exist.")
             self.id = ''
             self.members = ''
             self.type = ''
@@ -64,7 +66,7 @@ class Message:
             self.datetime = time.strftime('%Y-%m-%d %H:%M:%S')
             self.text = text
             self.author = sender.nickname
-            self.rank = type
+            self.rank = 'new'
         elif type == 'disp':
             self.id = sql_query['id']
             self.sender = sql_query['sender']
@@ -81,8 +83,35 @@ class Message:
         return s
 
     def add(self, connection):
-        query = "INSERT INTO messages(id, sender, thread, datetime, text, author, rank) VALUES" \
+        query = "INSERT INTO messages(id,sender,thread,datetime,text,author) VALUES" \
                 "('{0}','{1}','{2}','{3}','{4}','{5}')"\
-                .format(self.id, self.sender, self.thread, self.datetime, self.text, self.author, self.rank)
+                .format(self.id, self.sender, self.thread, self.datetime, self.text, self.author)
         connection.cursor.execute(query)
         connection.connection.commit()
+
+
+def newthread(connection, active_user, type, active_class, group_name=None, dm_to=None, description=''):
+    """
+    :param connection:
+    :param active_user: User object
+    :param type: 'direct', 'group', 'all'
+    :param group_name: only pass for group or all
+    :param active_class: Class object
+    :param dm_to: User object, only if type=direct
+    :param description: optional, only for group
+    """
+    members = active_user.id + ';'
+    if type == 'direct':
+        members += dm_to.id + ';'
+        group_name = active_user.nickname + dm_to.nickname
+    tid = "T"
+    i = 0
+    while i < 20:
+        tid += str(random.randint(0, 9))
+        i += 1
+    in_class = active_class.id
+    query = "INSERT INTO chat_threads(id, members, type, description, group_name, in_class) VALUES" \
+            "('{0}','{1}','{2}','{3}','{4}','{5}')"\
+            .format(tid, members, type, description, group_name, in_class)
+    connection.cursor.execute(query)
+    connection.connection.commit()
