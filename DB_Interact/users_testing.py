@@ -8,6 +8,8 @@ import users_utils
 from sql_connect import ConnectMySQL
 from users_utils import User
 from users_utils import Class
+from message_utils import Thread
+from message_utils import Message
 import getpass
 
 
@@ -15,8 +17,9 @@ def main():
     connection = ConnectMySQL()
     active_user = None
     active_class = None
+    active_thread = None
     while True:
-        command = input()
+        command = input(">>> ")
         if command == "!newuser":
             new_test(connection)
         if "!login" in command:
@@ -35,7 +38,7 @@ def main():
             if active_user is not None:
                 print(active_user)
             else:
-                print("ERROR: No user is logged in. Use -login to log in")
+                print("ERROR: No user is logged in. Use !login to log in")
         if "!addclass" in command:
             if active_user is not None:
                 i = command.index("C")
@@ -43,7 +46,7 @@ def main():
                 class_to_add = Class(connection, cid)
                 class_to_add.add_student(connection, active_user)
             else:
-                print("ERROR: Must log in first. Use -login to log in")
+                print("ERROR: Must log in first. Use !login to log in")
         if "!enterclass" in command:
             if active_user is not None:
                 i = command.index("C")
@@ -51,17 +54,53 @@ def main():
                 active_class = Class(connection, cid)
                 print("INFO: Entered class " + active_class.id + " with user " + active_user.nickname)
             else:
-                print("ERROR: Must log in first. Use -login to log in")
+                print("ERROR: Must log in first. Use !login to log in")
         if "!dClass" in command:
             if active_class is not None:
                 print(active_class)
             else:
-                print("ERROR: No user is logged in. Use -login to log in")
+                print("ERROR: No user is logged in. Use !login to log in")
         if "!dAll" in command:
             print("="*3+"USER:"+"="*3)
             print(active_user)
             print("="*3+"CLASS:"+"="*3)
             print(active_class)
+            print("="*3+"THREAD:"+"="*3)
+            print(active_thread)
+        if "!thread" in command:
+            i = command.index("-")
+            tid = command[i + 1:]
+            print(tid)
+            active_thread = Thread(connection, tid)
+            if active_user.id in active_thread.members or active_thread.type == 'all':
+                if active_thread.id is not '':
+                    print("INFO: Thread " + active_thread.id + " aka " + str(active_thread.group_name) + " selected. Type !m or .m to send messages.")
+                else:
+                    active_thread = None
+                    print("ERROR: Could not select thread")
+            else:
+                active_thread = None
+                print("ERROR: You are not in this thread")
+        if "!addtothread" in command:
+            if active_thread is not None and active_user is not None:
+                i = command.index("-")
+                unick = command[i + 1:]
+                active_thread.adduser(connection, unick)
+                print("INFO: Added " + unick + " to thread " + active_thread.group_name)
+            else:
+                print("ERROR: Could not add user. Make sure you are logged in and have an active thread")
+        if command == "!m":
+            print("Enter as many messages as you want, !~ to end.")
+            while True:
+                text = input("::")
+                if text == "!~":
+                    break
+                msg = Message(text=text, sender=active_user, thread=active_thread, type='new')
+                msg.add(connection)
+        if command == ".m":
+            text = input("::")
+            msg = Message(text=text, sender=active_user, thread=active_thread, type='new')
+            msg.add(connection)
         if "!quit" in command:
             break
     connection.close()
@@ -88,7 +127,6 @@ def new_test(connection):
     existing_nicknames = list()
     for n in existing_nicknames_dicts:
         existing_nicknames.append(n['nickname'])
-    print(existing_nicknames)
     while nick in existing_nicknames:
         nick = input("That nickname is taken. Try another nickname: ")
     password = input("Enter new user password: ")
