@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String LOGIN_NAME = "com.ClassNote.login.name";
+    public static final String ACTIVE_USER = "com.ClassNote.user.active";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +20,21 @@ public class MainActivity extends AppCompatActivity {
 
         final Button loginBtn  = findViewById(R.id.loginBtn);
         final Button githubBtn = findViewById(R.id.githubBtn);
-        final EditText loginName = findViewById(R.id.loginNameEditText);
+        final EditText loginNameEditText = findViewById(R.id.loginUserEditTxt);
+        final EditText passwordEditText = findViewById(R.id.passwordEditText);
 
         // Checks Login button clicks for user login
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                User activeUser = new User(loginNameEditText.getText().toString(), passwordEditText.getText().toString());
+
+                if(activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS){
+
                     Intent startIntent = new Intent(getApplicationContext(), SecondActivity.class);
-                    //loginName.
-                    startIntent.putExtra(LOGIN_NAME, loginName.getText().toString());
+                    startIntent.putExtra(ACTIVE_USER, activeUser);
                     startActivity(startIntent);
+                }
             }
         });
 
