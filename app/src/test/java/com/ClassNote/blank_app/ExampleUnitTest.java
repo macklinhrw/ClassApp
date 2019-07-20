@@ -1,4 +1,4 @@
-package com.example.classapp;
+package com.ClassNote.blank_app;
 
 import org.junit.Test;
 
