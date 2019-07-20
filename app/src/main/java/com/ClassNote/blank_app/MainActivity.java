@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Uri address = Uri.parse(GITHUB_ADDRESS);
 
-                //Launches devices webbrowser on link address
+                // Launches devices webbrowser on link address
                 Intent webRedirect = new Intent(Intent.ACTION_VIEW, address);
                 if(webRedirect.resolveActivity(getPackageManager()) != null){
                     startActivity(webRedirect);
