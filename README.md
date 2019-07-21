@@ -2,10 +2,10 @@
 
 An application for student communication
 
-###Macklin Reeve-Wilson
+### Macklin Reeve-Wilson
             User Interface and Android App Development
 
-###Eli Gilbert 
+### Eli Gilbert 
             MySQL and Data System Architecture
             Graphic Design
 
