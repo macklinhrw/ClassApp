@@ -50,7 +50,16 @@ class User:
             print("INFO: Updated name for user: " + self.id + " from " + self.name + " to " + name)
             self.name = name
             connection.cursor.execute(change_query)
-
+        if email is not None:
+            change_query = "update users set email='{0}' where id='{1}'".format(email, self.id)
+            print("INFO: Updated name for user: " + self.id + " from " + self.email + " to " + email)
+            self.email = email
+            connection.cursor.execute(change_query)
+        if pw is not None:
+            change_query = "update users set password='{0}' where id='{1}'".format(pw, self.id)
+            print("INFO: Updated name for user: " + self.id + " from " + self.pw + " to " + pw)
+            self.pw = pw
+            connection.cursor.execute(change_query)
         # TODO add copy of lines 53-57 for all params to update
         connection.connection.commit()
 
@@ -92,9 +101,7 @@ class Class:
     def add_student(self, connection, user):
         current_members = self.members
         if user.id not in current_members:
-            print(self.id)
             new_mem = current_members + user.id + ";"
-            print(new_mem)
             add_query = "UPDATE classes SET members='{0}' WHERE id='{1}'".format(new_mem, self.id)
             connection.cursor.execute(add_query)
             connection.connection.commit()

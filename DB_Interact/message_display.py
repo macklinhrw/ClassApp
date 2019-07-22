@@ -17,7 +17,10 @@ def main():
     thread_inp = input("Thread Title: ")
     active_thread = Thread(connection, thread_inp)
     prev = list()
-    subprocess.call('clear')
+    try:
+        subprocess.call('clear')
+    except Exception:
+        pass
     i = 0
     while i < 1000:
         connection = ConnectMySQL(mute=True)
