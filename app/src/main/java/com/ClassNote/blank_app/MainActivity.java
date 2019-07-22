@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     public static final String ACTIVE_USER = "com.ClassNote.user.active";
+    public static final String GITHUB_ADDRESS = "https://github.com/macklinhrw/ClassApp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,9 @@ public class MainActivity extends AppCompatActivity {
         githubBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String githubAddress = "https://github.com/macklinhrw/ClassApp";
-                Uri address = Uri.parse(githubAddress);
+                Uri address = Uri.parse(GITHUB_ADDRESS);
 
-                //Launches devices webbrowser on link address
+                // Launches devices webbrowser on link address
                 Intent webRedirect = new Intent(Intent.ACTION_VIEW, address);
                 if(webRedirect.resolveActivity(getPackageManager()) != null){
                     startActivity(webRedirect);
