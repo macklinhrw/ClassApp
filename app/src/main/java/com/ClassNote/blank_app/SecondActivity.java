@@ -24,7 +24,7 @@ public class SecondActivity extends AppCompatActivity {
                different activities */
             TextView greetingsText = findViewById(R.id.greetingsTxt);
             User activeUser = getIntent().getExtras().getParcelable(MainActivity.ACTIVE_USER);
-            String welcomeText = "Welcome: " + activeUser.getName() + "!";
+            String welcomeText = "Welcome: " + activeUser.getName();
             greetingsText.setText(welcomeText);
         }
 

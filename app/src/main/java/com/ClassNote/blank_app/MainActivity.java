@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.os.StrictMode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
         final Button githubBtn = findViewById(R.id.githubBtn);
         final EditText loginNameEditText = findViewById(R.id.loginUserEditTxt);
         final EditText passwordEditText = findViewById(R.id.passwordEditText);
+
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new
+                    StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         // Checks Login button clicks for user login
         loginBtn.setOnClickListener(new View.OnClickListener() {
