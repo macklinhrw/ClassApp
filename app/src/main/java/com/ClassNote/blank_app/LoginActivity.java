@@ -8,10 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     public static final String ACTIVE_USER = "com.ClassNote.user.active";
     public static final String USERNAME = "com.ClassNote.login.username";
@@ -41,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 User activeUser = new User(loginNameEditText.getText().toString(), passwordEditText.getText().toString());
 
-                // TEMP
-                //activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS
-                if(true){
-                    Intent startIntent = new Intent(getApplicationContext(), SecondActivity.class);
+                if(activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS){
+                    Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startIntent.putExtra(ACTIVE_USER, activeUser);
                     startActivity(startIntent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Wrong user credentials!", Toast.LENGTH_LONG).show();
                 }
             }
         });
