@@ -1,7 +1,7 @@
 try:
     import mysql.connector
     from mysql.connector import Error
-except ModuleNotFoundError:
+except ImportError:
     try:
         import subprocess
         subprocess.call(['pip', 'install', 'mysql-connector-python'])
@@ -11,6 +11,7 @@ except ModuleNotFoundError:
         print("ERROR: Could not connect to MySQL")
         print("BECAUSE: Could not pip install mysql-connector-python")
         print("This might be because pip is not installed on this computer.")
+
 
 class ConnectMySQL:
     def __init__(self, mute=False, host='aws'):
