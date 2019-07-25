@@ -2,6 +2,7 @@ package com.ClassNote.blank_app;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import org.json.JSONObject;
 
 public class User implements Parcelable {
 
@@ -21,8 +22,7 @@ public class User implements Parcelable {
 
 
     public User(String username, String password){
-        // TODO : This should be a cursor object for MySQL, not a String
-        String response = confirmCredentials(username, password);
+        JSONObject response = confirmCredentials(username, password);
         if(response != null){
             this.username = username;
             id = fetchID(response);
@@ -39,7 +39,14 @@ public class User implements Parcelable {
     }
 
     public void logout(){
-        // TODO : Plan the functionality here, handle internally or externally?
+        this.username = null;
+        id = null;
+        name = null;
+        birthDate = null;
+        description = null;
+        type = null;
+        email = null;
+        onboard = null;
     }
 
     /**
@@ -47,40 +54,76 @@ public class User implements Parcelable {
      * @param password
      * @return Null if credentials are wrong, MySQL cursor object if they are correct.
      */
-    private String confirmCredentials(String username, String password){
-        // TODO : connect to SQL
-        // Change return type to cursor object
-        return "TRUE";
+    private JSONObject confirmCredentials(String username, String password){
+        ConnectMySQL c = new ConnectMySQL();
+        try {
+            String jsonUserString = c.getUser(username, password);
+            System.out.println(jsonUserString);
+            JSONObject jsonUserObject = new JSONObject(jsonUserString);
+            return jsonUserObject;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // TODO : Change all parameters to Cursor object from String and fill functions with MySQL fetch
 
-    private String fetchName(String cursor){
-        return cursor;
+    private String fetchName(JSONObject cursor){
+        try {
+            return cursor.getString("name");
+        } catch(Exception e) {
+            return " ";
+        }
+
     }
 
-    private String fetchID(String cursor){
-        return cursor;
+    private String fetchID(JSONObject cursor){
+        try {
+            return cursor.getString("id");
+        } catch(Exception e) {
+            return " ";
+        }
     }
 
-    private String fetchBirthDate(String cursor){
-        return cursor;
+    private String fetchBirthDate(JSONObject cursor){
+        try {
+            return cursor.getString("birth");
+        } catch(Exception e) {
+            return " ";
+        }
     }
 
-    private String fetchDescription(String cursor){
-        return cursor;
+    private String fetchDescription(JSONObject cursor){
+        try {
+            return cursor.getString("description");
+        } catch(Exception e) {
+            return " ";
+        }
     }
 
-    private String fetchType(String cursor){
-        return cursor;
+    private String fetchType(JSONObject cursor){
+        try {
+            return cursor.getString("type");
+        } catch(Exception e) {
+            return " ";
+        }
     }
 
-    private String fetchEmail(String cursor){
-        return cursor;
+    private String fetchEmail(JSONObject cursor){
+        try {
+            return cursor.getString("email");
+        } catch(Exception e) {
+            return " ";
+        }
     }
 
-    private String fetchOnboard(String cursor){
-        return cursor;
+    private String fetchOnboard(JSONObject cursor){
+        try {
+            return cursor.getString("onboard");
+        } catch(Exception e) {
+            return " ";
+        }
     }
 
     // START OF GETTERS & SETTERS
