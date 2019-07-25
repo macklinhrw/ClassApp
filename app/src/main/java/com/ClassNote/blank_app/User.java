@@ -23,7 +23,7 @@ public class User implements Parcelable {
 
     public User(String username, String password){
         JSONObject response = confirmCredentials(username, password);
-        if(response != null){
+        if(!response.toString().contains("none")){
             this.username = username;
             id = fetchID(response);
             name = fetchName(response);

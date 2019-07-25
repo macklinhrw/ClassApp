@@ -24,9 +24,13 @@ public class ConnectMySQL{
             protected String doInBackground(String... strings) {
                 try{
                     URL url = new URL("http://classnoteutil.000webhostapp.com/users_connect.php?username="+strings[0]+"&password="+strings[1]);
+                    //System.out.println(url);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    //System.out.println(conn);
                     BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    //System.out.println(rd);
                     String jsonline = rd.readLine();
+                    System.out.println(jsonline);
                     return jsonline;
                 } catch(Exception e) {
                     e.printStackTrace();
@@ -45,7 +49,7 @@ public class ConnectMySQL{
             }
         }
         DownloadJSON d = new DownloadJSON();
-        d.execute(username, password);
+        //d.execute(username, password);
         return d.doInBackground(username, password);
     }
 }
