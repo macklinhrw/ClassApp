@@ -67,8 +67,6 @@ public class User implements Parcelable {
         }
     }
 
-    // TODO : Change all parameters to Cursor object from String and fill functions with MySQL fetch
-
     private String fetchName(JSONObject cursor){
         try {
             return cursor.getString("name");

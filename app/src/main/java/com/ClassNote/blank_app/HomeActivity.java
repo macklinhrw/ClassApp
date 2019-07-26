@@ -15,8 +15,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // TODO : Refactor + change id to logoutBtn
-        final Button exitBtn = findViewById(R.id.exitBtn);
+        final Button logoutBtn = findViewById(R.id.logoutBtn);
         final Button profileBtn = findViewById(R.id.profileBtn);
         final TextView greetingsText = findViewById(R.id.greetingsTxt);
 
@@ -27,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         String welcomeText = activeUser.getName() + "!";
         greetingsText.setText(welcomeText);
 
-        exitBtn.setOnClickListener(new View.OnClickListener() {
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activeUser.logout();
