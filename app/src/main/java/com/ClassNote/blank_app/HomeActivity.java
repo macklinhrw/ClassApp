@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         /* Extras is a bundle saved into the intent and can be used to pass data through
            different activities */
         User activeUser = getIntent().getExtras().getParcelable(LoginActivity.ACTIVE_USER);
-        String welcomeText = "Welcome: " + activeUser.getName();
+        String welcomeText = activeUser.getName() + "!";
         greetingsText.setText(welcomeText);
 
         exitBtn.setOnClickListener(new View.OnClickListener() {

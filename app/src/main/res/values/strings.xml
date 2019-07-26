@@ -30,4 +30,8 @@
     <string name="action_profile">Profile</string>
     <string name="action_messaging">Messaging</string>
     <string name="action_classes">Classes</string>
+    <string name="class_note_1">Class</string>
+    <string name="class_note_2">Note</string>
+    <string name="welcome_name">Welcome, </string>
 </resources>
+

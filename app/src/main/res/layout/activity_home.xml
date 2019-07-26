@@ -10,14 +10,24 @@
         android:id="@+id/greetingsTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/hello_world"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/welcomeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/welcome_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintRight_toLeftOf="@id/greetingsTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -29,7 +39,8 @@
         android:layout_marginBottom="24dp"
         android:text="@string/action_logout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/colorRedAccent" />
 
     <Button
         android:id="@+id/profileBtn"
@@ -43,7 +54,8 @@
         android:text="@string/action_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
     <Button
         android:id="@+id/messagingBtn"
@@ -57,7 +69,8 @@
         android:text="@string/action_messaging"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/profileBtn"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
     <Button
         android:id="@+id/classesBtn"
@@ -71,6 +84,7 @@
         android:text="@string/action_classes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messagingBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/messagingBtn"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
