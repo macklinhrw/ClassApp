@@ -30,6 +30,9 @@ public class HomeActivity extends AppCompatActivity {
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                activeUser.logout();
+                Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(startIntent);
                 finish();
             }
         });

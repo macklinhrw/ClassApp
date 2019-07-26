@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         final Button loginBtn  = findViewById(R.id.loginBtn);
         final Button githubBtn = findViewById(R.id.githubBtn);
@@ -51,9 +51,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS){
                     Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startIntent.putExtra(ACTIVE_USER, activeUser);
-                    loading.setVisibility(View.GONE);
                     startActivity(startIntent);
+                    loading.setVisibility(View.GONE);
+                    finish();
                 } else {
+                    loading.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Wrong user credentials!", Toast.LENGTH_LONG).show();
                 }
             }
