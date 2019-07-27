@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText loginNameEditText = findViewById(R.id.loginUserEditTxt);
         final EditText passwordEditText = findViewById(R.id.passwordEditText);
         final TextView registerTextView = findViewById(R.id.registerTextView);
+        final ProgressBar loading = findViewById(R.id.loginLoading);
 
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
@@ -40,11 +42,16 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // TODO : Fix loading bar, change to an observe()?
+                loading.setVisibility(View.VISIBLE);
+
                 User activeUser = new User(loginNameEditText.getText().toString(), passwordEditText.getText().toString());
 
                 if(activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS){
                     Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startIntent.putExtra(ACTIVE_USER, activeUser);
+                    loading.setVisibility(View.GONE);
                     startActivity(startIntent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong user credentials!", Toast.LENGTH_LONG).show();
