@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
                 Intent startIntent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startIntent.putExtra(LoginActivity.ACTIVE_USER, activeUser);
                 startActivity(startIntent);
+                finish();
             }
         });
 

@@ -2,6 +2,7 @@ package com.ClassNote.blank_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,7 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                // TODO : Find a better way to pass the information back without closing the homeactivity?
+                Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                startIntent.putExtra(LoginActivity.ACTIVE_USER, activeUser);
+                startActivity(startIntent);
             }
         });
 
