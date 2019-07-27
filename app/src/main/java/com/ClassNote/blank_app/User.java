@@ -54,6 +54,8 @@ public class User implements Parcelable {
      * @param password
      * @return Null if credentials are wrong, MySQL cursor object if they are correct.
      */
+
+    // TODO : build activity for updating user / pass
     private JSONObject confirmCredentials(String username, String password){
         ConnectMySQL c = new ConnectMySQL();
         try {
