@@ -79,7 +79,7 @@ public class ConnectMySQL{
                     return response;
                 } catch(Exception e) {
                     e.printStackTrace();
-                    return null;
+                    return "unknown failure";
                 }
             }
 
@@ -95,5 +95,63 @@ public class ConnectMySQL{
         }
         DownloadJSON d = new DownloadJSON();
         return d.doInBackground(username, password, name, email);
+    }
+
+    public String updateUser(String id, String email, String name, String birth, String description, String nickname) {
+
+        class DownloadJSON extends AsyncTask<String, Void, String> {
+
+            public DownloadJSON() {
+                super();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(String... strings) {
+                try{
+                    String query = "http://classnoteutil.000webhostapp.com/update_user.php?id="+id;
+                    if(email != null) {
+                        query += "&email=" + email;
+                    }
+                    if(name != null) {
+                        query += "&name=" + name;
+                    }
+                    if(birth != null) {
+                        query += "&birth=" + birth;
+                    }
+                    if(description != null) {
+                        query += "&description=" + description;
+                    }
+                    if(nickname != null) {
+                        query += "&nickname=" + nickname;
+                    }
+//                    System.out.println(query);
+                    URL url = new URL(query);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String response = rd.readLine();
+                    return response;
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return "unknown failure";
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    System.out.println(s);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        DownloadJSON d = new DownloadJSON();
+        return d.doInBackground(id, email, name, birth, description, nickname);
     }
 }

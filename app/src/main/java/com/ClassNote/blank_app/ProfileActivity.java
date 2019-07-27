@@ -48,7 +48,49 @@ public class ProfileActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "This hasn't been implemented yet!", Toast.LENGTH_LONG).show();
+                //FIXME if you go back to home and back to profile
+                // the changes you just made will not appear
+                // because I don't know how to save / load the new attribs globally
+                // but it does change it in the DB
+                // so if you log out and back in it shows the new attribs correctly
+                ConnectMySQL c = new ConnectMySQL();
+                String id = activeUser.getId();
+                String username = nicknameEditText.getText().toString();
+                if(username == activeUser.getUsername()) {
+                    username = null;
+                } else {
+                    activeUser.setUsername(username);
+                }
+                String email = emailEditText.getText().toString();
+                if(email == activeUser.getEmail()) {
+                    email = null;
+                } else {
+                    activeUser.setEmail(email);
+                }
+                String name = fullnameEditText.getText().toString();
+                if(name == activeUser.getName()) {
+                    name = null;
+                } else {
+                    activeUser.setName(name);
+                }
+                String birth = birthdateEditText.getText().toString();
+                if(birth == activeUser.getBirthDate()) {
+                    birth = null;
+                } else {
+                    activeUser.setName(birth);
+                }
+                String description = descriptionEditText.getText().toString();
+                if(description == activeUser.getDescription()) {
+                    description = null;
+                } else {
+                    activeUser.setDescription(description);
+                }
+                String response = c.updateUser(id, email, name, birth, description, username);
+                if(!response.contains("error")) {
+                    Toast.makeText(getApplicationContext(), "User information updated successfully!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "There was one or more errors when updating info.", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
