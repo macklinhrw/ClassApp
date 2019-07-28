@@ -191,10 +191,12 @@ public class ConnectMySQL{
                     for(String curClass : classStrings){
                         JSONObject json = new JSONObject(curClass);
                         System.out.println(json);
+                        ArrayList<String> members_list = new ArrayList<>();
+                        ArrayList<ThreadClass> threads_list = getThreads(json.getString("id"), id);
                         classes.add(new SchoolClass(json.getString("title"), json.getString("school"),
                                 json.getString("teacher"), json.getInt("period"), json.getString("type"),
-                                json.getString("id"), json.getString("description"), new ArrayList<String>(),
-                                new ArrayList<String>()));
+                                json.getString("id"), json.getString("description"), members_list,
+                                threads_list));
                     }
                     return classes;
                 } catch(Exception e) {
@@ -256,5 +258,60 @@ public class ConnectMySQL{
         }
         DownloadJSON d = new DownloadJSON();
         return d.doInBackground(userid, classid);
+    }
+
+    public ArrayList<ThreadClass> getThreads(String classid, String userid) {
+
+        class DownloadJSON extends AsyncTask<String, Void, ArrayList<ThreadClass>> {
+
+            public DownloadJSON() {
+                super();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected ArrayList<ThreadClass> doInBackground(String... strings) {
+                try{
+                    ArrayList<String> threadStrings = new ArrayList<>();
+                    ArrayList<ThreadClass> threads = new ArrayList<>();
+                    URL url = new URL("http://classnoteutil.000webhostapp.com/fetch_class_threads.php?classid="+strings[0]+"&userid="+strings[1]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String response = rd.readLine();
+                    while (response.contains("{")){
+                        threadStrings.add(response.substring(response.indexOf("{"), response.indexOf("}") + 1));
+                        response = response.substring(response.indexOf("}") + 1);
+                    }
+                    for(String curThread : threadStrings){
+                        JSONObject json = new JSONObject(curThread);
+                        System.out.println(json);
+                        ArrayList<String> members_list = new ArrayList<>();
+                        threads.add(new ThreadClass(json.getString("id"),
+                                json.getString("in_class"), json.getString("group_name"), json.getString("type"),
+                                json.getString("id"), json.getString("description"), members_list));
+                    }
+                    return threads;
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<ThreadClass> s) {
+                super.onPostExecute(s);
+                try {
+                    System.out.println(s);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        DownloadJSON d = new DownloadJSON();
+        return d.doInBackground(classid, userid);
     }
 }
