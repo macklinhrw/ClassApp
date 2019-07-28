@@ -18,6 +18,8 @@ public class SchoolClass {
     private int period;
 
     public SchoolClass(String name, String school, String teacher, int period, Type type, String id, String description, List<String> members, List<String> threads){
+        this.members = members;
+        this.threads = threads;
         this.name = name;
         this.teacher = teacher;
         this.period = period;
