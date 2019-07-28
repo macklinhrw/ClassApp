@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.Enums;
+package com.ClassNote.blank_app.data;
 
 public enum Path {
 

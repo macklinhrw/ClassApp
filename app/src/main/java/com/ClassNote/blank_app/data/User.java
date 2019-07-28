@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app;
+package com.ClassNote.blank_app.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
