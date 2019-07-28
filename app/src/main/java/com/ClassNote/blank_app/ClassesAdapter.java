@@ -3,14 +3,19 @@ package com.ClassNote.blank_app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHolder> {
 
-    public ClassesAdapter(){
-        // TODO : Dataset here?
+    private List<SchoolClass> classes;
+
+    public ClassesAdapter(List<SchoolClass> classes){
+        this.classes = classes;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -32,11 +37,20 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         // TODO : set text corresponding to dataset here
+        final TextView classNameTextView = holder.view.findViewById(R.id.classNameTextView);
+        final TextView teacherTextView = holder.view.findViewById(R.id.teacherTextView);
+        final TextView periodTextView = holder.view.findViewById(R.id.periodTextView);
+
+        SchoolClass curClass = classes.get(position);
+
+        classNameTextView.setText(curClass.getName());
+        teacherTextView.setText(curClass.getTeacher() + " -");
+        periodTextView.setText(String.valueOf(curClass.getPeriod()));
     }
 
     @Override
     public int getItemCount() {
         // TODO : Find max amount able to be held by HomeActivity
-        return 10;
+        return classes.size();
     }
 }

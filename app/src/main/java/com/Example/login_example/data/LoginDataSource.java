@@ -5,7 +5,7 @@ import com.Example.login_example.data.model.LoggedInUser;
 import java.io.IOException;
 
 /**
- * Class that handles authentication w/ login credentials and retrieves user information.
+ * SchoolClass that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
 

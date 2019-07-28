@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ClassNote.blank_app.ConnectMySQL;
+import com.ClassNote.blank_app.Enums.Path;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class NewUserActivity extends AppCompatActivity {
         final EditText registerEmailEditText = findViewById(R.id.registerEmailEditText);
         final EditText registerNameEditText = findViewById(R.id.registerNameEditText);
 
+        // TODO : Restrict passwords
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +42,7 @@ public class NewUserActivity extends AppCompatActivity {
                     //TODO : goto the profile page
 
                     Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startIntent.putExtra(LoginActivity.ACTIVE_USER, new User(username, password));
+                    startIntent.putExtra(Path.ACTIVE_USER.str, new User(username, password));
                     startActivity(startIntent);
 
 

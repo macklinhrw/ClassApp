@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.ClassNote.blank_app.Enums.Path;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -29,13 +30,15 @@ public class ProfileActivity extends AppCompatActivity {
         final Button backBtn = findViewById(R.id.profileBackBtn);
         final Button saveBtn = findViewById(R.id.profileSaveBtn);
 
-        User activeUser = getIntent().getExtras().getParcelable(LoginActivity.ACTIVE_USER);
+        User activeUser = getIntent().getExtras().getParcelable(Path.ACTIVE_USER.str);
 
         nicknameEditText.setText(activeUser.getUsername());
         fullnameEditText.setText(activeUser.getName());
         emailEditText.setText(activeUser.getEmail());
         onboardTextView.setText(activeUser.getOnboard());
         userIDTextView.setText(activeUser.getId());
+
+        // TODO : restrict editing of user info
 
         if(activeUser.getDescription().equals("null") & activeUser.getBirthDate().equals("null")) {
             Toast.makeText(getApplicationContext(), "Update your user info!", Toast.LENGTH_LONG).show();
@@ -59,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO : Find a better way to pass the information back without closing the homeactivity?
                 Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startIntent.putExtra(LoginActivity.ACTIVE_USER, activeUser);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                 startActivity(startIntent);
             }
         });
@@ -67,11 +70,6 @@ public class ProfileActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //FIXME if you go back to home and back to profile
-                // the changes you just made will not appear
-                // because I don't know how to save / load the new attribs globally
-                // but it does change it in the DB
-                // so if you log out and back in it shows the new attribs correctly
                 ConnectMySQL c = new ConnectMySQL();
                 String id = activeUser.getId();
                 String username = nicknameEditText.getText().toString();

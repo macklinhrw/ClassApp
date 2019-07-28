@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import com.ClassNote.blank_app.Enums.Path;
+
 public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter mAdapter;
@@ -28,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         // Change the text in TextView to greet logged on user
         /* Extras is a bundle saved into the intent and can be used to pass data through
            different activities */
-        User activeUser = getIntent().getExtras().getParcelable(LoginActivity.ACTIVE_USER);
+        User activeUser = getIntent().getExtras().getParcelable(Path.ACTIVE_USER.str);
         String welcomeText = activeUser.getName() + "!";
         greetingsText.setText(welcomeText);
 
@@ -36,13 +40,17 @@ public class HomeActivity extends AppCompatActivity {
         classesRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         classesRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ClassesAdapter();
+
+        // Updates adapter's dataset based on user's classes HERE
+        List<SchoolClass> classes = activeUser.fetchClasses();
+        mAdapter = new ClassesAdapter(classes);
+
         classesRecyclerView.setAdapter(mAdapter);
 
         // Check for new user
         if(activeUser.getDescription().equals("null") || activeUser.getBirthDate().equals("null")){
             Intent startIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-            startIntent.putExtra(LoginActivity.ACTIVE_USER, activeUser);
+            startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
             startActivity(startIntent);
             finish();
         }
@@ -61,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startIntent.putExtra(LoginActivity.ACTIVE_USER, activeUser);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                 startActivity(startIntent);
                 finish();
             }

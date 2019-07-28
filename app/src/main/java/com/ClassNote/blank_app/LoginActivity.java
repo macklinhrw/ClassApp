@@ -13,11 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+import com.ClassNote.blank_app.Enums.Path;
 
-    public static final String ACTIVE_USER = "com.ClassNote.user.active";
-    public static final String USERNAME = "com.ClassNote.login.username";
-    public static final String GITHUB_ADDRESS = "https://github.com/macklinhrw/ClassApp";
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS){
                     Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startIntent.putExtra(ACTIVE_USER, activeUser);
+                    startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                     startActivity(startIntent);
                     loading.setVisibility(View.GONE);
                     finish();
@@ -64,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         githubBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri address = Uri.parse(GITHUB_ADDRESS);
+                Uri address = Uri.parse(Path.GITHUB_ADDRESS.str);
 
                 // Launches devices webbrowser on link address
                 Intent webRedirect = new Intent(Intent.ACTION_VIEW, address);
@@ -81,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Passes already filled out username and starts NewUserActivity
                 String user = loginNameEditText.getText().toString();
                 if(!user.equals("")){
-                    startIntent.putExtra(USERNAME, user);
+                    startIntent.putExtra(Path.USERNAME.str, user);
                 }
                 startActivity(startIntent);
             }

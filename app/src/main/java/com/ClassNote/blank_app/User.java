@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User implements Parcelable {
 
     public static final int FAILED_CREDENTIALS = -1;
@@ -127,6 +130,13 @@ public class User implements Parcelable {
         } catch(Exception e) {
             return " ";
         }
+    }
+
+    public List<SchoolClass> fetchClasses(){
+        ArrayList<SchoolClass> classes = new ArrayList<>();
+        //classes.add()
+        // TODO : iterate over fetched json file and add each class to classes
+        return classes;
     }
 
     // START OF GETTERS & SETTERS
