@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.ui;
+package com.ClassNote.blank_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 

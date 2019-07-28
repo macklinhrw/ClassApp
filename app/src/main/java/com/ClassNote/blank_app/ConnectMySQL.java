@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.data;
+package com.ClassNote.blank_app;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.AsyncTask;
-
-import com.ClassNote.blank_app.data.SchoolClass;
 
 import org.json.JSONObject;
 

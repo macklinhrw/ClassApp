@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.data;
+package com.ClassNote.blank_app;
 
 import java.util.List;
 

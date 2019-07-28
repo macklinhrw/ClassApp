@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.ui;
+package com.ClassNote.blank_app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ClassNote.blank_app.data.ConnectMySQL;
-import com.ClassNote.blank_app.data.Path;
-import com.ClassNote.blank_app.R;
-import com.ClassNote.blank_app.data.User;
+import com.ClassNote.blank_app.enums.Path;
 
 public class NewUserActivity extends AppCompatActivity {
 

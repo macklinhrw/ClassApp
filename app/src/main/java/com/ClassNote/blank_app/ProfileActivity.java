@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.ui;
+package com.ClassNote.blank_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,10 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ClassNote.blank_app.data.ConnectMySQL;
-import com.ClassNote.blank_app.data.Path;
-import com.ClassNote.blank_app.R;
-import com.ClassNote.blank_app.data.User;
+import com.ClassNote.blank_app.enums.Path;
 
 public class ProfileActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.data;
+package com.ClassNote.blank_app.enums;
 
 public enum Type {
     GENERAL("general"),

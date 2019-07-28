@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app.ui;
+package com.ClassNote.blank_app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.ClassNote.blank_app.enums.Path;
 
-import com.ClassNote.blank_app.adapters.ClassesAdapter;
-import com.ClassNote.blank_app.data.Path;
-import com.ClassNote.blank_app.R;
-import com.ClassNote.blank_app.data.SchoolClass;
-import com.ClassNote.blank_app.data.User;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
