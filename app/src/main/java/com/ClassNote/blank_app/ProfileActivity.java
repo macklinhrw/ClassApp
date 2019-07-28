@@ -2,12 +2,14 @@ package com.ClassNote.blank_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.ClassNote.blank_app.Enums.Path;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -28,31 +30,46 @@ public class ProfileActivity extends AppCompatActivity {
         final Button backBtn = findViewById(R.id.profileBackBtn);
         final Button saveBtn = findViewById(R.id.profileSaveBtn);
 
-        User activeUser = getIntent().getExtras().getParcelable(LoginActivity.ACTIVE_USER);
+        User activeUser = getIntent().getExtras().getParcelable(Path.ACTIVE_USER.str);
 
         nicknameEditText.setText(activeUser.getUsername());
         fullnameEditText.setText(activeUser.getName());
-        descriptionEditText.setText(activeUser.getDescription());
         emailEditText.setText(activeUser.getEmail());
-        birthdateEditText.setText(activeUser.getBirthDate());
         onboardTextView.setText(activeUser.getOnboard());
         userIDTextView.setText(activeUser.getId());
+
+        // TODO : restrict editing of user info
+
+        if(activeUser.getDescription().equals("null") & activeUser.getBirthDate().equals("null")) {
+            Toast.makeText(getApplicationContext(), "Update your user info!", Toast.LENGTH_LONG).show();
+            descriptionEditText.setText("");
+            birthdateEditText.setText("");
+        } else if (activeUser.getDescription().equals("null")) {
+            Toast.makeText(getApplicationContext(), "Update your description!", Toast.LENGTH_LONG).show();
+            descriptionEditText.setText("");
+            birthdateEditText.setText(activeUser.getBirthDate());
+        } else if(activeUser.getBirthDate().equals("null")){
+            Toast.makeText(getApplicationContext(), "Update your birthdate!", Toast.LENGTH_LONG).show();
+            birthdateEditText.setText("");
+            descriptionEditText.setText(activeUser.getDescription());
+        } else {
+            birthdateEditText.setText(activeUser.getBirthDate());
+            descriptionEditText.setText(activeUser.getDescription());
+        }
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                // TODO : Find a better way to pass the information back without closing the homeactivity?
+                Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
+                startActivity(startIntent);
             }
         });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //FIXME if you go back to home and back to profile
-                // the changes you just made will not appear
-                // because I don't know how to save / load the new attribs globally
-                // but it does change it in the DB
-                // so if you log out and back in it shows the new attribs correctly
                 ConnectMySQL c = new ConnectMySQL();
                 String id = activeUser.getId();
                 String username = nicknameEditText.getText().toString();
@@ -77,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if(birth == activeUser.getBirthDate()) {
                     birth = null;
                 } else {
-                    activeUser.setName(birth);
+                    activeUser.setBirthDate(birth);
                 }
                 String description = descriptionEditText.getText().toString();
                 if(description == activeUser.getDescription()) {

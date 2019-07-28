@@ -3,7 +3,7 @@ package com.Example.login_example.data;
 import com.Example.login_example.data.model.LoggedInUser;
 
 /**
- * Class that requests authentication and user information from the remote data source and
+ * SchoolClass that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 public class LoginRepository {

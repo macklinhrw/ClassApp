@@ -1,5 +1,6 @@
 package com.ClassNote.blank_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ClassNote.blank_app.ConnectMySQL;
+import com.ClassNote.blank_app.Enums.Path;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -22,8 +24,9 @@ public class NewUserActivity extends AppCompatActivity {
         final EditText registerUserEditTxt = findViewById(R.id.registerUserEditTxt);
         final EditText registerPasswordEditText = findViewById(R.id.registerPasswordEditText);
         final EditText registerEmailEditText = findViewById(R.id.registerEmailEditText);
-//        final EditText registerNameEditText = findViewById(R.id.registerNameEditText);
+        final EditText registerNameEditText = findViewById(R.id.registerNameEditText);
 
+        // TODO : Restrict passwords
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,13 +35,17 @@ public class NewUserActivity extends AppCompatActivity {
                 String username = registerUserEditTxt.getText().toString();
                 String password = registerPasswordEditText.getText().toString();
                 String email = registerEmailEditText.getText().toString();
-//                String name = registerNameEditText.getText().toString();
-                String name = "Java Test";
-                //TODO add name field
+                String name = registerNameEditText.getText().toString();
                 String newUser = c.newUser(username, password, name, email);
                 if(newUser.equals("success")) {
                     Toast.makeText(getApplicationContext(), "New user created!", Toast.LENGTH_LONG).show();
-                    //TODO automatically logs in at this point
+                    //TODO : goto the profile page
+
+                    Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startIntent.putExtra(Path.ACTIVE_USER.str, new User(username, password));
+                    startActivity(startIntent);
+
+
                 } else if(newUser.equals("username taken")) {
                     Toast.makeText(getApplicationContext(), "Username was already taken. Try another.", Toast.LENGTH_LONG).show();
                 } else if(newUser.equals("unknown failure")) {

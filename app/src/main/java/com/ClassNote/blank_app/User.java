@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User implements Parcelable {
 
     public static final int FAILED_CREDENTIALS = -1;
@@ -19,6 +22,9 @@ public class User implements Parcelable {
     private String onboard;
     private String username;
     private int credentials;
+
+    // TODO : add newUser boolean to only ask to update user info once per launch
+    // determines is newUser if description or birthdate are null
 
 
     public User(String username, String password){
@@ -54,6 +60,8 @@ public class User implements Parcelable {
      * @param password
      * @return Null if credentials are wrong, MySQL cursor object if they are correct.
      */
+
+    // TODO : build activity for updating user / pass
     private JSONObject confirmCredentials(String username, String password){
         ConnectMySQL c = new ConnectMySQL();
         try {
@@ -66,8 +74,6 @@ public class User implements Parcelable {
             return null;
         }
     }
-
-    // TODO : Change all parameters to Cursor object from String and fill functions with MySQL fetch
 
     private String fetchName(JSONObject cursor){
         try {
@@ -124,6 +130,13 @@ public class User implements Parcelable {
         } catch(Exception e) {
             return " ";
         }
+    }
+
+    public List<SchoolClass> fetchClasses(){
+        ArrayList<SchoolClass> classes = new ArrayList<>();
+        //classes.add()
+        // TODO : iterate over fetched json file and add each class to classes
+        return classes;
     }
 
     // START OF GETTERS & SETTERS

@@ -1,7 +1,7 @@
 package com.Example.login_example.login.ui;
 
 /**
- * Class exposing authenticated user details to the UI.
+ * SchoolClass exposing authenticated user details to the UI.
  */
 class LoggedInUserView {
     private String displayName;
