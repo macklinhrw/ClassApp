@@ -1,30 +1,31 @@
 package com.ClassNote.blank_app;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SchoolClass {
+import com.ClassNote.blank_app.Enums.Type;
+
+public class ThreadClass {
 
     private String name;
     private String id;
     private List<String> members;
-    private String teacher;
     private String school;
     private String type;
     private String description;
-    private List<ThreadClass> threads;
-    private int period;
+    private String in_class;
 
-    public SchoolClass(String name, String school, String teacher, int period, String type, String id, String description, List<String> members, List<ThreadClass> threads){
+
+    public ThreadClass(String in_class, String school, String group_name, String type, String id, String description, List<String> members){
         this.members = members;
-        this.threads = threads;
-        this.name = name;
-        this.teacher = teacher;
-        this.period = period;
+        this.in_class = in_class;
+        this.name = group_name;
         this.type = type;
         this.school = school;
         this.description = description;
         this.id = id;
     }
+
 
     // TODO : Overload constructor?
 
@@ -45,30 +46,6 @@ public class SchoolClass {
         this.id = id;
     }
 
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
-    }
-
-    public List<ThreadClass> getThreads() {
-        return threads;
-    }
-
-    public void setThreads(List<ThreadClass> threads) {
-        this.threads = threads;
-    }
-
-    public int getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(int period) {
-        this.period = period;
-    }
-
     public List<String> getMembers() {
         return members;
     }
@@ -85,6 +62,14 @@ public class SchoolClass {
         this.school = school;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -93,11 +78,11 @@ public class SchoolClass {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public String getIn_class() {
+        return in_class;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setIn_class(String in_class) {
+        this.in_class = in_class;
     }
 }
