@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ClassNote.blank_app.Enums.Path;
+import com.ClassNote.blank_app.Enums.Type;
 
 public class HomeActivity extends AppCompatActivity {
 

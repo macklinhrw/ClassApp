@@ -133,10 +133,8 @@ public class User implements Parcelable {
     }
 
     public List<SchoolClass> fetchClasses(){
-        ArrayList<SchoolClass> classes = new ArrayList<>();
-        //classes.add()
-        // TODO : iterate over fetched json file and add each class to classes
-        return classes;
+        ConnectMySQL c = new ConnectMySQL();
+        return c.getClass(id);
     }
 
     // START OF GETTERS & SETTERS
