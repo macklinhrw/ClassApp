@@ -181,11 +181,8 @@ public class ConnectMySQL{
                     ArrayList<String> classStrings = new ArrayList<>();
                     ArrayList<SchoolClass> classes = new ArrayList<>();
                     URL url = new URL("http://classnoteutil.000webhostapp.com/fetch_user_classes.php?id="+strings[0]);
-                    //System.out.println(url);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    //System.out.println(conn);
                     BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    //System.out.println(rd);
                     String response = rd.readLine();
                     while (response.contains("{")){
                         classStrings.add(response.substring(response.indexOf("{"), response.indexOf("}") + 1));
@@ -218,5 +215,46 @@ public class ConnectMySQL{
         }
         DownloadJSON d = new DownloadJSON();
         return d.doInBackground(id);
+    }
+
+    public String addClassForUser(String userid, String classid) {
+
+        class DownloadJSON extends AsyncTask<String, Void, String> {
+
+            public DownloadJSON() {
+                super();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(String... strings) {
+                try{
+                    URL url = new URL("http://classnoteutil.000webhostapp.com/add_class_for_user.php?userid="+strings[0]+"&classid="+strings[1]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String response = rd.readLine();
+                    return response;
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return "unknown failure";
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+                    System.out.println(s);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        DownloadJSON d = new DownloadJSON();
+        return d.doInBackground(userid, classid);
     }
 }
