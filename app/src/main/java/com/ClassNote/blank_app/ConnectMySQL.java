@@ -3,7 +3,14 @@ import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.AsyncTask;
+
+import com.ClassNote.blank_app.Enums.Type;
+
+import org.json.JSONObject;
 
 public class ConnectMySQL{
 
@@ -153,5 +160,63 @@ public class ConnectMySQL{
         }
         DownloadJSON d = new DownloadJSON();
         return d.doInBackground(id, email, name, birth, description, nickname);
+    }
+
+    public List<SchoolClass> getClass(String id) {
+
+        class DownloadJSON extends AsyncTask<String, Void, List<SchoolClass>> {
+
+            public DownloadJSON() {
+                super();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected List<SchoolClass> doInBackground(String... strings) {
+                try{
+                    ArrayList<String> classStrings = new ArrayList<>();
+                    ArrayList<SchoolClass> classes = new ArrayList<>();
+                    URL url = new URL("http://classnoteutil.000webhostapp.com/fetch_user_classes.php?id="+strings[0]);
+                    //System.out.println(url);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    //System.out.println(conn);
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    //System.out.println(rd);
+                    String response = rd.readLine();
+                    while (response.contains("{")){
+                        classStrings.add(response.substring(response.indexOf("{"), response.indexOf("}") + 1));
+                        response = response.substring(response.indexOf("}") + 1);
+                    }
+                    for(String curClass : classStrings){
+                        JSONObject json = new JSONObject(curClass);
+                        System.out.println(json);
+                        classes.add(new SchoolClass(json.getString("title"), json.getString("school"),
+                                json.getString("teacher"), json.getInt("period"), json.getString("type"),
+                                json.getString("id"), json.getString("description"), new ArrayList<String>(),
+                                new ArrayList<String>()));
+                    }
+                    return classes;
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(List<SchoolClass> s) {
+                super.onPostExecute(s);
+                try {
+                    System.out.println(s);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        DownloadJSON d = new DownloadJSON();
+        return d.doInBackground(id);
     }
 }

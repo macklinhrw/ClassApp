@@ -1,7 +1,5 @@
 package com.ClassNote.blank_app.Enums;
 
-import android.os.Parcelable;
-
 public enum Path {
 
     ACTIVE_USER("com.ClassNote.user.active"),

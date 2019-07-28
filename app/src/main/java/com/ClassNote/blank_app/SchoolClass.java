@@ -12,12 +12,12 @@ public class SchoolClass {
     private List<String> members;
     private String teacher;
     private String school;
-    private Type type;
+    private String type;
     private String description;
     private List<String> threads;
     private int period;
 
-    public SchoolClass(String name, String school, String teacher, int period, Type type, String id, String description, List<String> members, List<String> threads){
+    public SchoolClass(String name, String school, String teacher, int period, String type, String id, String description, List<String> members, List<String> threads){
         this.members = members;
         this.threads = threads;
         this.name = name;
@@ -96,11 +96,11 @@ public class SchoolClass {
         this.description = description;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

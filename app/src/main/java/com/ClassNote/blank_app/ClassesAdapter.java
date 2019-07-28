@@ -3,7 +3,9 @@ package com.ClassNote.blank_app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,12 +42,22 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHo
         final TextView classNameTextView = holder.view.findViewById(R.id.classNameTextView);
         final TextView teacherTextView = holder.view.findViewById(R.id.teacherTextView);
         final TextView periodTextView = holder.view.findViewById(R.id.periodTextView);
+        final Button detailsBtn = holder.view.findViewById(R.id.detailsBtn);
 
         SchoolClass curClass = classes.get(position);
 
         classNameTextView.setText(curClass.getName());
         teacherTextView.setText(curClass.getTeacher() + " -");
         periodTextView.setText(String.valueOf(curClass.getPeriod()));
+
+        detailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(holder.view.getContext(), curClass.getDescription(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     @Override
