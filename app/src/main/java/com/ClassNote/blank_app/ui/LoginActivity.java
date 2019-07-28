@@ -1,4 +1,4 @@
-package com.ClassNote.blank_app;
+package com.ClassNote.blank_app.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,9 +13,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ClassNote.blank_app.Enums.Path;
+import com.ClassNote.blank_app.data.Path;
+import com.ClassNote.blank_app.R;
+import com.ClassNote.blank_app.data.User;
 
 public class LoginActivity extends AppCompatActivity {
+
+    // TODO : ViewModels, Observe(), Fragments
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

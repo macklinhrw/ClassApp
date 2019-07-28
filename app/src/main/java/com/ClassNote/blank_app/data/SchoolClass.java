@@ -1,9 +1,6 @@
-package com.ClassNote.blank_app;
+package com.ClassNote.blank_app.data;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.ClassNote.blank_app.Enums.Type;
 
 public class SchoolClass {
 

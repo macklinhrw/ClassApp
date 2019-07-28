@@ -1,17 +1,18 @@
-package com.ClassNote.blank_app;
+package com.ClassNote.blank_app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ClassNote.blank_app.ConnectMySQL;
-import com.ClassNote.blank_app.Enums.Path;
+import com.ClassNote.blank_app.data.ConnectMySQL;
+import com.ClassNote.blank_app.data.Path;
+import com.ClassNote.blank_app.R;
+import com.ClassNote.blank_app.data.User;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class NewUserActivity extends AppCompatActivity {
                 String newUser = c.newUser(username, password, name, email);
                 if(newUser.equals("success")) {
                     Toast.makeText(getApplicationContext(), "New user created!", Toast.LENGTH_LONG).show();
-                    //TODO : goto the profile page
+                    //TODO : auto fillout user
 
                     Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
                     startIntent.putExtra(Path.ACTIVE_USER.str, new User(username, password));

@@ -1,10 +1,10 @@
-package com.ClassNote.blank_app;
+package com.ClassNote.blank_app.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Parcelable {
