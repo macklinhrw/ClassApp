@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ClassNote.blank_app.enums.Path;
+import com.ClassNote.blank_app.Enums.Path;
 
 public class ProfileActivity extends AppCompatActivity {
 

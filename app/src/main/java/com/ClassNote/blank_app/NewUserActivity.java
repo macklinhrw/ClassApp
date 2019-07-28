@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ClassNote.blank_app.enums.Path;
+import com.ClassNote.blank_app.Enums.Path;
 
 public class NewUserActivity extends AppCompatActivity {
 

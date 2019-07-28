@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ClassNote.blank_app.enums.Path;
+import com.ClassNote.blank_app.Enums.Path;
 
 import java.util.List;
 
