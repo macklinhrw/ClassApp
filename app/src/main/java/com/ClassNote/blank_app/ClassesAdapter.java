@@ -1,35 +1,42 @@
 package com.ClassNote.blank_app;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHolder> {
 
+    public ClassesAdapter(){
+        // TODO : Dataset here?
+    }
+
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        public MyViewHolder(TextView v){
+        View view;
+        public MyViewHolder(View v){
             super(v);
-            textView = v;
+            view = v;
         }
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_class, parent, false);
+        MyViewHolder vh = new MyViewHolder(v);
+        return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        // TODO : set text corresponding to dataset here
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        // TODO : Find max amount able to be held by HomeActivity
+        return 10;
     }
 }

@@ -20,6 +20,9 @@ public class User implements Parcelable {
     private String username;
     private int credentials;
 
+    // TODO : add newUser boolean to only ask to update user info once per launch
+    // determines is newUser if description or birthdate are null
+
 
     public User(String username, String password){
         JSONObject response = confirmCredentials(username, password);

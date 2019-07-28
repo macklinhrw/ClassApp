@@ -31,9 +31,11 @@
     <string name="action_save">Save</string>
     <string name="action_profile">Profile</string>
     <string name="action_messaging">Messaging</string>
-    <string name="action_classes">Classes</string>
+    <string name="action_classes">Add</string>
     <string name="class_note_1">Class</string>
     <string name="class_note_2">Note</string>
     <string name="welcome_name">Welcome, </string>
+    <string name="test_class">Test Class</string>
+    <string name="adapter_class_details">Details</string>
 </resources>
 

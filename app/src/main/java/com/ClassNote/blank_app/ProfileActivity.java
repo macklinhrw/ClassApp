@@ -33,11 +33,26 @@ public class ProfileActivity extends AppCompatActivity {
 
         nicknameEditText.setText(activeUser.getUsername());
         fullnameEditText.setText(activeUser.getName());
-        descriptionEditText.setText(activeUser.getDescription());
         emailEditText.setText(activeUser.getEmail());
-        birthdateEditText.setText(activeUser.getBirthDate());
         onboardTextView.setText(activeUser.getOnboard());
         userIDTextView.setText(activeUser.getId());
+
+        if(activeUser.getDescription().equals("null") & activeUser.getBirthDate().equals("null")) {
+            Toast.makeText(getApplicationContext(), "Update your user info!", Toast.LENGTH_LONG).show();
+            descriptionEditText.setText("");
+            birthdateEditText.setText("");
+        } else if (activeUser.getDescription().equals("null")) {
+            Toast.makeText(getApplicationContext(), "Update your description!", Toast.LENGTH_LONG).show();
+            descriptionEditText.setText("");
+            birthdateEditText.setText(activeUser.getBirthDate());
+        } else if(activeUser.getBirthDate().equals("null")){
+            Toast.makeText(getApplicationContext(), "Update your birthdate!", Toast.LENGTH_LONG).show();
+            birthdateEditText.setText("");
+            descriptionEditText.setText(activeUser.getDescription());
+        } else {
+            birthdateEditText.setText(activeUser.getBirthDate());
+            descriptionEditText.setText(activeUser.getDescription());
+        }
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if(birth == activeUser.getBirthDate()) {
                     birth = null;
                 } else {
-                    activeUser.setName(birth);
+                    activeUser.setBirthDate(birth);
                 }
                 String description = descriptionEditText.getText().toString();
                 if(description == activeUser.getDescription()) {
