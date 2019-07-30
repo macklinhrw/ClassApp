@@ -12,9 +12,9 @@ public class SchoolClass {
     private String type;
     private String description;
     private List<ThreadClass> threads;
-    private int period;
+    private String period;
 
-    public SchoolClass(String name, String school, String teacher, int period, String type, String id, String description, List<String> members, List<ThreadClass> threads){
+    public SchoolClass(String name, String school, String teacher, String period, String type, String id, String description, List<String> members, List<ThreadClass> threads){
         this.members = members;
         this.threads = threads;
         this.name = name;
@@ -61,11 +61,11 @@ public class SchoolClass {
         this.threads = threads;
     }
 
-    public int getPeriod() {
+    public String getPeriod() {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 

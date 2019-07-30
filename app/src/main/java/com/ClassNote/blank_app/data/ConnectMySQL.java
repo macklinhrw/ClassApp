@@ -5,12 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
 import android.os.AsyncTask;
-
-import com.ClassNote.blank_app.data.SchoolClass;
-import com.ClassNote.blank_app.data.ThreadClass;
-
 import org.json.JSONObject;
 
 public class ConnectMySQL{
@@ -195,7 +190,7 @@ public class ConnectMySQL{
                         ArrayList<String> members_list = new ArrayList<>();
                         ArrayList<ThreadClass> threads_list = getThreads(json.getString("id"), id);
                         classes.add(new SchoolClass(json.getString("title"), json.getString("school"),
-                                json.getString("teacher"), json.getInt("period"), json.getString("type"),
+                                json.getString("teacher"), json.getString("period"), json.getString("type"),
                                 json.getString("id"), json.getString("description"), members_list,
                                 threads_list));
                     }
