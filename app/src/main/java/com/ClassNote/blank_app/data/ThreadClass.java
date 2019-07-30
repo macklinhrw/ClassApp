@@ -34,9 +34,24 @@ public class ThreadClass {
         this.last_message_dt = df.format(d);
     }
 
+    // gets last 50 messages sent
     public ArrayList<MessageClass> fetchMessages() {
         ConnectMySQL2 c = new ConnectMySQL2();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date d=new Date();
+        this.last_message_dt = df.format(d);
         return c.fetchMessages(this.id);
+    }
+
+    // gets messages that have been sent since last checked
+    public ArrayList<MessageClass> fetchNewMessages() {
+        ConnectMySQL2 c = new ConnectMySQL2();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date d=new Date();
+        this.last_message_dt = df.format(d);
+        return c.fetchNewMessages(this.id, this.last_message_dt);
     }
 
     // TODO : Overload constructor?
