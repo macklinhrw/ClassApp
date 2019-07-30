@@ -1,5 +1,7 @@
 package com.ClassNote.blank_app.adapters;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ClassNote.blank_app.R;
+import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.data.SchoolClass;
+import com.ClassNote.blank_app.data.User;
+import com.ClassNote.blank_app.ui.ClassActivity;
 
 import java.util.List;
 
 public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHolder> {
 
     private List<SchoolClass> classes;
+    private User activeUser;
 
-    public ClassesAdapter(List<SchoolClass> classes){
+    public ClassesAdapter(List<SchoolClass> classes, User activeUser){
         this.classes = classes;
+        this.activeUser = activeUser;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -57,6 +64,11 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHo
             @Override
             public void onClick(View view) {
                 Toast.makeText(holder.view.getContext(), curClass.getDescription(), Toast.LENGTH_SHORT).show();
+                Intent startIntent = new Intent(holder.view.getContext(), ClassActivity.class);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
+                startIntent.putExtra(Path.ACTIVE_CLASS.str, position);
+                holder.view.getContext().startActivity(startIntent);
+                //((Activity)holder.view.getContext()).finish();
             }
         });
 

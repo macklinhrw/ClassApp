@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // Updates adapter's dataset based on user's classes HERE
         List<SchoolClass> classes = activeUser.fetchClasses();
-        mAdapter = new ClassesAdapter(classes);
+        mAdapter = new ClassesAdapter(classes, activeUser);
 
         classesRecyclerView.setAdapter(mAdapter);
 

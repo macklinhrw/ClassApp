@@ -287,7 +287,7 @@ public class ConnectMySQL{
                         System.out.println(json);
                         ArrayList<String> members_list = new ArrayList<>();
                         threads.add(new ThreadClass(json.getString("id"),
-                                json.getString("in_class"), json.getString("group_name"), json.getString("type"),
+                                json.getString("class"), json.getString("group_name"), json.getString("type"),
                                 json.getString("id"), json.getString("description"), members_list));
                     }
                     return threads;
