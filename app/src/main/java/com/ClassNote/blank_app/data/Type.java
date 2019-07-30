@@ -4,7 +4,10 @@ public enum Type {
     GENERAL("general"),
     PHYSICS("physics"),
     MATH("math"),
-    ENGLISH("english");
+    ENGLISH("english"),
+    CHEMISTRY("chemistry"),
+    HISTORY("history");
+
 
     private String name;
 
