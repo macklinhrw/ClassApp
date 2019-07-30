@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.ClassNote.blank_app.R;
+import com.ClassNote.blank_app.adapters.MessagesAdapter;
 import com.ClassNote.blank_app.adapters.ThreadAdapter;
 import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.data.SchoolClass;
@@ -15,7 +19,7 @@ import com.ClassNote.blank_app.data.User;
 
 import java.util.ArrayList;
 
-public class ClassActivity extends AppCompatActivity {
+public class MessagesActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -23,23 +27,17 @@ public class ClassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class);
+        setContentView(R.layout.activity_messages);
 
-        final RecyclerView threadsRecyclerView = findViewById(R.id.threadsRecyclerView);
 
-        User activeUser = getIntent().getExtras().getParcelable(Path.ACTIVE_USER.str);
-        int pos = getIntent().getExtras().getInt(Path.ACTIVE_CLASS.str);
+        final RecyclerView threadsRecyclerView = findViewById(R.id.messagesRecyclerView);
+
+        ThreadClass tc = getIntent().getExtras().getParcelable(Path.ACTIVE_THREAD.str);
 
         threadsRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         threadsRecyclerView.setLayoutManager(layoutManager);
-        SchoolClass c = activeUser.fetchClasses().get(pos);
-        if( c.getThreads() == null){
-            mAdapter = new ThreadAdapter(new ArrayList<ThreadClass>());
-            threadsRecyclerView.setAdapter(mAdapter);
-        } else {
-            mAdapter = new ThreadAdapter(c.getThreads());
-            threadsRecyclerView.setAdapter(mAdapter);
-        }
+        mAdapter = new MessagesAdapter(tc.fetchMessages());
+        threadsRecyclerView.setAdapter(mAdapter);
     }
 }

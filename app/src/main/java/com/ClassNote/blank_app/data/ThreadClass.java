@@ -1,5 +1,8 @@
 package com.ClassNote.blank_app.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
@@ -7,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.ArrayList;
 
-public class ThreadClass {
+public class ThreadClass implements Parcelable {
 
     private String name;
     private String id;
@@ -119,5 +122,43 @@ public class ThreadClass {
 
     public void setLast_message_dt(String last_message_dt) {
         this.last_message_dt = last_message_dt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        String[] stringPackage = {name, id, school, type, description, in_class, last_message_dt};
+        parcel.writeStringArray(stringPackage);
+    }
+
+    // Borrowed from https://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<ThreadClass> CREATOR = new Parcelable.Creator<ThreadClass>() {
+        public ThreadClass createFromParcel(Parcel in) {
+            return new ThreadClass(in);
+        }
+
+        public ThreadClass[] newArray(int size) {
+            return new ThreadClass[size];
+        }
+    };
+
+    private ThreadClass(Parcel in){
+
+        // TODO : members
+
+        String[] stringPackage = new String[7];
+        in.readStringArray(stringPackage);
+        name = stringPackage[0];
+        id = stringPackage[1];
+        school = stringPackage[2];
+        type = stringPackage[3];
+        description = stringPackage[4];
+        in_class = stringPackage[5];
+        last_message_dt = stringPackage[6];
     }
 }

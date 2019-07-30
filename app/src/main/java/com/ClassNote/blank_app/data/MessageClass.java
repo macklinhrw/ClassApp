@@ -20,10 +20,12 @@ public class MessageClass {
         this.sender = sender;
         this.thread = thread;
         this.utc_datetime = utc_datetime;
+        // TODO : fix this
         // Not sure if this actually works
-        DateFormat localformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        localformat.setTimeZone(TimeZone.getTimeZone(getCurrentTimeZone()));
-        this.local_datetime = localformat.format(utc_datetime);
+        //DateFormat localformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //localformat.setTimeZone(TimeZone.getTimeZone(getCurrentTimeZone()));
+        //this.local_datetime = localformat.format(utc_datetime);
+        this.local_datetime = utc_datetime;
         this.text = text;
         this.author = author;
     }
