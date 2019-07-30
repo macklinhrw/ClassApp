@@ -2,7 +2,7 @@ package com.ClassNote.blank_app.data;
 
 import java.util.TimeZone;
 import java.util.Calendar;
-import java.text.DateFormat;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class MessageClass {
@@ -20,12 +20,15 @@ public class MessageClass {
         this.sender = sender;
         this.thread = thread;
         this.utc_datetime = utc_datetime;
-        // TODO : fix this
-        // Not sure if this actually works
-        //DateFormat localformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //localformat.setTimeZone(TimeZone.getTimeZone(getCurrentTimeZone()));
-        //this.local_datetime = localformat.format(utc_datetime);
-        this.local_datetime = utc_datetime;
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+            df.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = df.parse(utc_datetime);
+            df.setTimeZone(TimeZone.getDefault());
+            this.local_datetime = df.format(date);
+        } catch(Exception e) {
+            this.local_datetime = utc_datetime;
+        }
         this.text = text;
         this.author = author;
     }
