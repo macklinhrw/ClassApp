@@ -111,7 +111,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
             } else if(timeSince >= 86400000){
                 date = yesterdayFormat.format(thenDate);
             } else {
-                date = todayFormat.format(thenDate);
+                if(now.get(Calendar.DAY_OF_WEEK) - then.get(Calendar.DAY_OF_WEEK) != 0){
+                    date = yesterdayFormat.format(thenDate);
+                } else {
+                    date = todayFormat.format(thenDate);
+                }
             }
             timeTextView.setText(date);
 
