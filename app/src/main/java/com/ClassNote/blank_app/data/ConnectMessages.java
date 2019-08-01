@@ -1,7 +1,6 @@
 package com.ClassNote.blank_app.data;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.ClassNote.blank_app.ui.MessagesViewModel;
 
@@ -13,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
 
 public class ConnectMessages {
 
@@ -21,6 +21,7 @@ public class ConnectMessages {
     private String thread;
     private String time;
     private boolean finishTask;
+    private long lasttime;
 
     public void updateNewMessages(List<MessageClass> result) {
         if(result != null){
@@ -28,14 +29,20 @@ public class ConnectMessages {
         }
         if(!finishTask){
             // TODO : wait certain time?
-            NewMessagesTask nmt = new NewMessagesTask();
-            if(result != null){
-                String newTime = result.get(result.size() - 1).getUtc_datetime();
-                time = newTime;
-                nmt.execute(thread, newTime);
-            } else {
-                nmt.execute(thread, time);
-            }
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    NewMessagesTask nmt = new NewMessagesTask();
+                    if(result != null){
+                        String newTime = result.get(result.size() - 1).getUtc_datetime();
+                        time = newTime;
+                        nmt.execute(thread, newTime);
+                    } else {
+                        nmt.execute(thread, time);
+                    }
+                }
+            }, 1000);
         }
     }
 
@@ -89,7 +96,7 @@ public class ConnectMessages {
                 }
                 return messages;
             } catch(Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 return null;
             }
         }

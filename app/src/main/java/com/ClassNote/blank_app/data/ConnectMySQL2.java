@@ -38,7 +38,7 @@ public class ConnectMySQL2 {
                     }
                     for(String curClass : messageStrings){
                         JSONObject json = new JSONObject(curClass);
-                        System.out.println(json);
+//                        System.out.println(json);
                         messages.add(new MessageClass(json.getString("id"), json.getString("sender"),
                                 json.getString("thread"), json.getString("datetime"), json.getString("text"),
                                 json.getString("author")));
@@ -54,7 +54,7 @@ public class ConnectMySQL2 {
             protected void onPostExecute(ArrayList<MessageClass> s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -92,7 +92,7 @@ public class ConnectMySQL2 {
                     }
                     for(String curClass : messageStrings){
                         JSONObject json = new JSONObject(curClass);
-                        System.out.println(json);
+//                        System.out.println(json);
                         messages.add(new MessageClass(json.getString("id"), json.getString("sender"),
                                 json.getString("thread"), json.getString("datetime"), json.getString("text"),
                                 json.getString("author")));
@@ -108,7 +108,7 @@ public class ConnectMySQL2 {
             protected void onPostExecute(ArrayList<MessageClass> s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -157,7 +157,7 @@ public class ConnectMySQL2 {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -166,4 +166,5 @@ public class ConnectMySQL2 {
         DownloadJSON d = new DownloadJSON();
         return d.doInBackground(userid, thread, author, text);
     }
+
 }

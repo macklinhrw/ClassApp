@@ -90,7 +90,7 @@ public class ConnectMySQL{
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -148,7 +148,7 @@ public class ConnectMySQL{
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -186,7 +186,7 @@ public class ConnectMySQL{
                     }
                     for(String curClass : classStrings){
                         JSONObject json = new JSONObject(curClass);
-                        System.out.println(json);
+//                        System.out.println(json);
                         ArrayList<String> members_list = new ArrayList<>();
                         ArrayList<ThreadClass> threads_list = getThreads(json.getString("id"), id);
                         classes.add(new SchoolClass(json.getString("title"), json.getString("school"),
@@ -205,7 +205,7 @@ public class ConnectMySQL{
             protected void onPostExecute(List<SchoolClass> s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -246,7 +246,7 @@ public class ConnectMySQL{
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -284,7 +284,7 @@ public class ConnectMySQL{
                     }
                     for(String curThread : threadStrings){
                         JSONObject json = new JSONObject(curThread);
-                        System.out.println(json);
+//                        System.out.println(json);
                         ArrayList<String> members_list = new ArrayList<>();
                         threads.add(new ThreadClass(json.getString("id"),
                                 json.getString("class"), json.getString("group_name"), json.getString("type"),
@@ -301,7 +301,7 @@ public class ConnectMySQL{
             protected void onPostExecute(ArrayList<ThreadClass> s) {
                 super.onPostExecute(s);
                 try {
-                    System.out.println(s);
+//                    System.out.println(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

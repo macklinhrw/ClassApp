@@ -3,7 +3,6 @@ package com.ClassNote.blank_app.data;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.Calendar;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class MessageClass {
@@ -54,5 +53,4 @@ public class MessageClass {
     public String getAuthor() {
         return author;
     }
-
 }
