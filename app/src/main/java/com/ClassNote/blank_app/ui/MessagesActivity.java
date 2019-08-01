@@ -98,11 +98,6 @@ public class MessagesActivity extends AppCompatActivity {
                 //Log.i("msg", date);
 
                 c.sendMessage(activeUser.getId(), tc.getId(), activeUser.getName(), sendMessageTextView.getText().toString());
-
-                ArrayList<MessageClass> temp = new ArrayList<>();
-                MessageClass m = new MessageClass("", activeUser.getId(), tc.getId(), date, sendMessageTextView.getText().toString(), activeUser.getName());
-                temp.add(m);
-                model.addMessages(temp);
                 //mAdapter.notifyItemInserted(messages.size() - 1);
                 //mAdapter.notifyDataSetChanged();
                 messagesRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
