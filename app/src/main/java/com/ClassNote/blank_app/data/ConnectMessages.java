@@ -1,6 +1,7 @@
 package com.ClassNote.blank_app.data;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 
 import com.ClassNote.blank_app.ui.MessagesViewModel;
@@ -12,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ConnectMessages {
@@ -28,18 +30,25 @@ public class ConnectMessages {
         }
         if(!finishTask){
             // TODO : wait certain time?
-            NewMessagesTask nmt = new NewMessagesTask();
-            if(result != null){
-                String newTime = result.get(result.size() - 1).getUtc_datetime();
-                time = newTime;
-                nmt.execute(thread, newTime);
-            } else {
-                nmt.execute(thread, time);
-            }
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    NewMessagesTask nmt = new NewMessagesTask();
+                    if(result != null){
+                        String newTime = result.get(result.size() - 1).getUtc_datetime();
+                        time = newTime;
+                        nmt.execute(thread, newTime);
+                    } else {
+                        nmt.execute(thread, time);
+                    }
+                }
+            }, 1000);
         }
     }
 
     public void onLoadMessages(List<MessageClass> messages){
+        Collections.reverse(messages);
         model.updateMessages(messages);
     }
 
@@ -82,7 +91,7 @@ public class ConnectMessages {
                 }
                 for(String curClass : messageStrings){
                     JSONObject json = new JSONObject(curClass);
-                    System.out.println(json);
+                    //Log.i("message", json.toString());
                     messages.add(new MessageClass(json.getString("id"), json.getString("sender"),
                             json.getString("thread"), json.getString("datetime"), json.getString("text"),
                             json.getString("author")));
@@ -118,7 +127,7 @@ public class ConnectMessages {
                 }
                 for(String curClass : messageStrings){
                     JSONObject json = new JSONObject(curClass);
-                    System.out.println(json);
+                    //Log.i("message", json.toString());
                     messages.add(new MessageClass(json.getString("id"), json.getString("sender"),
                             json.getString("thread"), json.getString("datetime"), json.getString("text"),
                             json.getString("author")));
