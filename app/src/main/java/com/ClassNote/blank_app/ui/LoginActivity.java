@@ -79,8 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 loading.setVisibility(View.VISIBLE);
 
-                ConnectUser c = new ConnectUser();
-                c.login(loginNameEditText.getText().toString(), passwordEditText.getText().toString(), loginViewModel);
+                loginViewModel.login(loginNameEditText.getText().toString(), passwordEditText.getText().toString());
             }
         });
 
