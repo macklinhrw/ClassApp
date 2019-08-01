@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import android.os.Handler;
 
 public class ConnectMessages {
 
@@ -23,6 +24,7 @@ public class ConnectMessages {
     private String thread;
     private String time;
     private boolean finishTask;
+    private long lasttime;
 
     public void updateNewMessages(List<MessageClass> result) {
         if(result != null){
@@ -98,7 +100,7 @@ public class ConnectMessages {
                 }
                 return messages;
             } catch(Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 return null;
             }
         }
