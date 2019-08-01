@@ -2,6 +2,7 @@ package com.ClassNote.blank_app.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 Toast.makeText(holder.view.getContext(), String.valueOf(t.getId()), Toast.LENGTH_SHORT).show();
+                Log.i("toast", t.getId());
 
                 Intent startIntent = new Intent(holder.view.getContext(), MessagesActivity.class);
                 startIntent.putExtra(Path.ACTIVE_THREAD.str, t);
