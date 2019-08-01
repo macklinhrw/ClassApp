@@ -43,7 +43,8 @@ public class NewUserActivity extends AppCompatActivity {
                     //TODO : auto fillout user
 
                     Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startIntent.putExtra(Path.ACTIVE_USER.str, new User(username, password));
+                    // TODO : update for asynclogin
+                    startIntent.putExtra(Path.ACTIVE_USER.str, new User());
                     startActivity(startIntent);
 
 
