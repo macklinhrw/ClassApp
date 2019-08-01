@@ -20,26 +20,10 @@ public class MessageClass {
         this.sender = sender;
         this.thread = thread;
         this.utc_datetime = utc_datetime;
-
-        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date parsed = null;
-        sourceFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        try{
-            parsed = sourceFormat.parse(utc_datetime); // => Date is in UTC now
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        destFormat.setTimeZone(TimeZone.getTimeZone(getCurrentTimeZone()));
-        this.local_datetime = destFormat.format(parsed);
+        FormattedDate d = new FormattedDate(utc_datetime);
+        this.local_datetime = d.convertToLocal();
         this.text = text;
         this.author = author;
-    }
-
-    public String getCurrentTimeZone(){
-        TimeZone tz = Calendar.getInstance().getTimeZone();
-        System.out.println(tz.getDisplayName());
-        return tz.getID();
     }
 
     public String getId() {

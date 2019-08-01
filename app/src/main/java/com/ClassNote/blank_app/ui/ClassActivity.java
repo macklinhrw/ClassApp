@@ -35,7 +35,7 @@ public class ClassActivity extends AppCompatActivity {
         threadsRecyclerView.setLayoutManager(layoutManager);
         SchoolClass c = activeUser.fetchClasses().get(pos);
         if( c.getThreads() == null){
-            mAdapter = new ThreadAdapter(new ArrayList<ThreadClass>(), activeUser);
+            mAdapter = new ThreadAdapter(new ArrayList<>(), activeUser);
             threadsRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter = new ThreadAdapter(c.getThreads(), activeUser);

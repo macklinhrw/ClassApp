@@ -1,5 +1,6 @@
 package com.ClassNote.blank_app.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,7 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.MyViewHold
                 startIntent.putExtra(Path.ACTIVE_THREAD.str, t);
                 startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                 holder.view.getContext().startActivity(startIntent);
+                //((Activity)holder.view.getContext()).finish();
             }
         });
     }
