@@ -78,6 +78,9 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHo
     @Override
     public int getItemCount() {
         // TODO : Find max amount able to be held by HomeActivity
+//        if(classes == null){
+//            return 0;
+//        }
         return classes.size();
     }
 }
