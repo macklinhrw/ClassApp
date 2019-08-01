@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.json.JSONObject;
 
 public class ConnectMySQL2 {
@@ -140,6 +142,7 @@ public class ConnectMySQL2 {
             protected String doInBackground(String... strings) {
                 try{
                     URL url = new URL("http://classnoteutil.000webhostapp.com/send_message.php?uid="+strings[0]+"&thread="+strings[1]+"&author="+strings[2]+"&text="+strings[3]);
+                    Log.i("msg", "http://classnoteutil.000webhostapp.com/send_message.php?uid="+strings[0]+"&thread="+strings[1]+"&author="+strings[2]+"&text="+strings[3]);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     String response = rd.readLine();

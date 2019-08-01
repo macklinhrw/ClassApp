@@ -1,5 +1,6 @@
 package com.ClassNote.blank_app.data;
 
+import java.util.Date;
 import java.util.TimeZone;
 import java.util.Calendar;
 import java.text.DateFormat;
@@ -20,12 +21,18 @@ public class MessageClass {
         this.sender = sender;
         this.thread = thread;
         this.utc_datetime = utc_datetime;
-        // TODO : fix this
-        // Not sure if this actually works
-        //DateFormat localformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //localformat.setTimeZone(TimeZone.getTimeZone(getCurrentTimeZone()));
-        //this.local_datetime = localformat.format(utc_datetime);
-        this.local_datetime = utc_datetime;
+
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parsed = null;
+        sourceFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try{
+            parsed = sourceFormat.parse(utc_datetime); // => Date is in UTC now
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        destFormat.setTimeZone(TimeZone.getTimeZone(getCurrentTimeZone()));
+        this.local_datetime = destFormat.format(parsed);
         this.text = text;
         this.author = author;
     }
@@ -63,4 +70,5 @@ public class MessageClass {
     public String getAuthor() {
         return author;
     }
+
 }
