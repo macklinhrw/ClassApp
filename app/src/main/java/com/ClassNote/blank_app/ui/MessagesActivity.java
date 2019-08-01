@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
@@ -58,10 +59,12 @@ public class MessagesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTimeZone(TimeZone.getDefault());
                 Date d = cal.getTime();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
                 String date = dateFormat.format(d);
+
+                Log.i("msg", date);
 
                 c.sendMessage(activeUser.getId(), tc.getId(), activeUser.getName(),sendMessageTextView.getText().toString());
                 messages.add(new MessageClass("", activeUser.getId(),tc.getId(),date,sendMessageTextView.getText().toString(), activeUser.getName()));

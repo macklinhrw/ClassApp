@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyViewHolder> {
 
@@ -71,6 +72,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         SimpleDateFormat yesterdayFormat = new SimpleDateFormat("'Yesterday at' h:mm a");
         SimpleDateFormat todayFormat = new SimpleDateFormat("'Today at' h:mm a");
 
+        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
         // Formatting for the date
         String date;
@@ -81,7 +83,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
 
         Date thenDate = null;
         try {
-            thenDate = dateFormat.parse(ms.getUtc_datetime());
+            thenDate = dateFormat.parse(ms.getLocal_datetime());
 
             nowBlank.set(now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DATE),0,0,0);
             then.setTimeInMillis(thenDate.getTime());
@@ -89,7 +91,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
 //            Log.i("dmes", "" + (nowBlank.getTimeInMillis() - thenDate.getTime()));
 //            Log.i("dmes", "Now: " + nowBlank.getTimeInMillis());
 //            Log.i("dmes", "Then: " + thenDate.getTime());
-//            Log.i("dmes", "Unformatted: " + ms.getUtc_datetime());
+//            Log.i("dmes", "Unformatted: " + ms.getLocalDateTime());
 //            Log.i("dmes", "Mili of date: " + thenDate.getTime());
 
             long timeSince = nowBlank.getTimeInMillis() - thenDate.getTime();
@@ -118,7 +120,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
             MessageClass msLast = messages.get(position - 1);
 
             try {
-                Date lastTime = dateFormat.parse(msLast.getUtc_datetime());
+                Date lastTime = dateFormat.parse(msLast.getLocal_datetime());
                 if(thenDate != null && thenDate.getTime() - lastTime.getTime() <= MESSAGE_COMBINE_PERIOD){
                     timeTextView.setVisibility(View.GONE);
                     senderNameTextView.setVisibility(View.GONE);
@@ -143,7 +145,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         if(position != messages.size() - 1 && messages.get(position + 1).getAuthor().equals(messages.get(position).getAuthor())){
             MessageClass msNext = messages.get(position + 1);
             try {
-                Date nextTime = dateFormat.parse(msNext.getUtc_datetime());
+                Date nextTime = dateFormat.parse(msNext.getLocal_datetime());
                 if(thenDate != null && nextTime.getTime() - thenDate.getTime() <= MESSAGE_COMBINE_PERIOD){
                     constraintMessagesLayout.setPadding(32, constraintMessagesLayout.getPaddingTop(),16,0);
                 } else {
