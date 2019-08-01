@@ -1,8 +1,10 @@
 package com.ClassNote.blank_app.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
+import com.ClassNote.blank_app.data.ConnectUser;
 import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.User;
@@ -40,26 +45,42 @@ public class LoginActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        LoginViewModel loginViewModel = new LoginViewModel();
+        User activeUser = new User();
+
+        loginViewModel.getLoginResult().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String loginResult) {
+                if (loginResult == null) {
+                    return;
+                }
+                loading.setVisibility(View.GONE);
+                if (loginResult.equals("failed")) {
+                    Toast.makeText(getApplicationContext(), "Wrong user credentials!", Toast.LENGTH_SHORT).show();
+                }
+                if (!loginResult.equals("failed")) {
+                    //Log.i("userlogin", loginResult);
+                    activeUser.updateUser(loginResult);
+                    Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
+                    startActivity(startIntent);
+                }
+                setResult(Activity.RESULT_OK);
+
+                //Complete and destroy login activity once successful
+                finish();
+            }
+        });
+
         // Checks Login button clicks for user login
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // TODO : Fix loading bar, change to an observe()?
                 loading.setVisibility(View.VISIBLE);
 
-                User activeUser = new User(loginNameEditText.getText().toString(), passwordEditText.getText().toString());
-
-                if(activeUser.getCredentials() != User.FAILED_CREDENTIALS && activeUser.getCredentials() != User.UNCONFIRMED_CREDENTIALS){
-                    Intent startIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
-                    startActivity(startIntent);
-                    loading.setVisibility(View.GONE);
-                    finish();
-                } else {
-                    loading.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Wrong user credentials!", Toast.LENGTH_LONG).show();
-                }
+                ConnectUser c = new ConnectUser();
+                c.login(loginNameEditText.getText().toString(), passwordEditText.getText().toString(), loginViewModel);
             }
         });
 

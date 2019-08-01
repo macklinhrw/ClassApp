@@ -27,21 +27,8 @@ public class User implements Parcelable {
     // determines is newUser if description or birthdate are null
 
 
-    public User(String username, String password){
-        JSONObject response = confirmCredentials(username, password);
-        if(!response.toString().contains("none")){
-            this.username = username;
-            id = fetchID(response);
-            name = fetchName(response);
-            birthDate = fetchBirthDate(response);
-            description = fetchDescription(response);
-            type = fetchType(response);
-            email = fetchEmail(response);
-            onboard = fetchOnboard(response);
-            credentials = CONFIRMED_CREDENTIALS;
-        } else {
-            credentials = FAILED_CREDENTIALS;
-        }
+    public User(){
+        // defualt constructor
     }
 
     public void logout(){
@@ -56,22 +43,29 @@ public class User implements Parcelable {
     }
 
     /**
-     * @param username
-     * @param password
+     * @param jsonUserString
      * @return Null if credentials are wrong, MySQL cursor object if they are correct.
      */
 
     // TODO : build activity for updating user / pass
-    private JSONObject confirmCredentials(String username, String password){
-        ConnectMySQL c = new ConnectMySQL();
-        try {
-            String jsonUserString = c.getUser(username, password);
-            System.out.println(jsonUserString);
-            JSONObject jsonUserObject = new JSONObject(jsonUserString);
-            return jsonUserObject;
-        } catch(Exception e) {
-            e.printStackTrace();
-            return null;
+    public void updateUser(String jsonUserString){
+        if(jsonUserString.contains("none")){
+            credentials = FAILED_CREDENTIALS;
+        } else {
+            try {
+                JSONObject response = new JSONObject(jsonUserString);
+                this.username = response.getString("nickname");
+                id = fetchID(response);
+                name = fetchName(response);
+                birthDate = fetchBirthDate(response);
+                description = fetchDescription(response);
+                type = fetchType(response);
+                email = fetchEmail(response);
+                onboard = fetchOnboard(response);
+                credentials = CONFIRMED_CREDENTIALS;
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
