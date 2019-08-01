@@ -63,4 +63,5 @@ public class MessageClass {
     public String getAuthor() {
         return author;
     }
+
 }

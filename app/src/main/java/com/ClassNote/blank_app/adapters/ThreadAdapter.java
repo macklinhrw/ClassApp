@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.data.ThreadClass;
+import com.ClassNote.blank_app.data.User;
 import com.ClassNote.blank_app.ui.MessagesActivity;
 
 import java.util.List;
@@ -21,9 +23,11 @@ import java.util.List;
 public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.MyViewHolder> {
 
     private List<ThreadClass> threads;
+    private User activeUser;
 
-    public ThreadAdapter(List<ThreadClass> threads){
+    public ThreadAdapter(List<ThreadClass> threads, User activeUser){
         this.threads = threads;
+        this.activeUser = activeUser;
     }
 
     @NonNull
@@ -51,6 +55,7 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.MyViewHold
 
                 Intent startIntent = new Intent(holder.view.getContext(), MessagesActivity.class);
                 startIntent.putExtra(Path.ACTIVE_THREAD.str, t);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                 holder.view.getContext().startActivity(startIntent);
             }
         });
