@@ -1,14 +1,11 @@
 package com.ClassNote.blank_app.adapters;
 
-import android.graphics.Color;
-import android.os.Message;
-import android.os.Parcelable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.MessageClass;
-import com.ClassNote.blank_app.data.SchoolClass;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyViewHolder> {
 
@@ -62,12 +60,40 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         messageTextView.setText(ms.getText());
         messageTextView.setMaxWidth(800);
 
+//        Picasso.get().
+//                load("http://classnoteutil.000webhostapp.com/get_user_icon.php?id="+ms.getSender())
+//                .resize(40,40)
+//                .into(profileImageView);
 
-        if(ms.getAuthor().equals("elig")){
-            profileImageView.setImageResource(R.drawable.circle2);
-        } else {
-            profileImageView.setImageResource(R.drawable.circle);
-        }
+//        Picasso.Builder builder = new Picasso.Builder(holder.view.getContext());
+//        builder.listener(new Picasso.Listener()
+//        {
+//            @Override
+//            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+//            {
+//                exception.printStackTrace();
+//            }
+//        });
+
+//        if(!ms.getAuthor().equals("Macklin")){
+//            builder.build().load("https://cdn.discordapp.com/avatars/262322723923951627/aa8d6e478700a59b769ad21e3f6864a1.png?size=128")
+//                    .resize(40,40)
+//                    .centerCrop()
+//                    .transform(new CropCircleTransformation())
+//                    .into(profileImageView);
+//        } else {
+//            builder.build().load("https://cdn.discordapp.com/avatars/279761194024435714/c2103e7c7620928ce48b0fae72f17580.png?size=128")
+//                    .resize(40,40)
+//                    .centerCrop()
+//                    .transform(new CropCircleTransformation())
+//                    .into(profileImageView);
+//        }
+
+
+
+//        Log.i("image", "http://classnoteutil.000webhostapp.com/get_user_icon.php?id="+ms.getSender());
+
+        //http://classnoteutil.000webhostapp.com/get_user_icon.php?id=U#########
 
         // formats
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -76,8 +102,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         SimpleDateFormat shortFormat = new SimpleDateFormat("EEEE 'at' h:mm a");
         SimpleDateFormat yesterdayFormat = new SimpleDateFormat("'Yesterday at' h:mm a");
         SimpleDateFormat todayFormat = new SimpleDateFormat("'Today at' h:mm a");
-
-        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
         // Formatting for the date
         String date;
@@ -111,7 +135,11 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
             } else if(timeSince >= 86400000){
                 date = yesterdayFormat.format(thenDate);
             } else {
-                date = todayFormat.format(thenDate);
+                if(now.get(Calendar.DAY_OF_WEEK) - then.get(Calendar.DAY_OF_WEEK) != 0){
+                    date = yesterdayFormat.format(thenDate);
+                } else {
+                    date = todayFormat.format(thenDate);
+                }
             }
             timeTextView.setText(date);
 

@@ -6,6 +6,8 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.json.JSONObject;
 
 public class ConnectMySQL{
@@ -278,13 +280,16 @@ public class ConnectMySQL{
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     String response = rd.readLine();
+                    if(response.contains("\"result\":\"none\"")){
+                        return null;
+                    }
                     while (response.contains("{")){
                         threadStrings.add(response.substring(response.indexOf("{"), response.indexOf("}") + 1));
                         response = response.substring(response.indexOf("}") + 1);
                     }
                     for(String curThread : threadStrings){
                         JSONObject json = new JSONObject(curThread);
-//                        System.out.println(json);
+                        Log.i("classes", json.toString());
                         ArrayList<String> members_list = new ArrayList<>();
                         threads.add(new ThreadClass(json.getString("id"),
                                 json.getString("class"), json.getString("group_name"), json.getString("type"),
