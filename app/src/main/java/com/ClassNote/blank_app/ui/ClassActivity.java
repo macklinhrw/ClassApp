@@ -14,6 +14,7 @@ import com.ClassNote.blank_app.data.ThreadClass;
 import com.ClassNote.blank_app.data.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClassActivity extends AppCompatActivity {
 
@@ -33,8 +34,12 @@ public class ClassActivity extends AppCompatActivity {
         threadsRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         threadsRecyclerView.setLayoutManager(layoutManager);
-        SchoolClass c = activeUser.fetchClasses().get(pos);
-        if( c.getThreads() == null){
+        List<SchoolClass> sc = activeUser.fetchClasses();
+        SchoolClass c = null;
+        if(sc != null){
+            c = sc.get(pos);
+        }
+        if( c != null && c.getThreads() == null){
             mAdapter = new ThreadAdapter(new ArrayList<>(), activeUser);
             threadsRecyclerView.setAdapter(mAdapter);
         } else {
