@@ -167,4 +167,73 @@ public class ConnectMySQL2 {
         return d.doInBackground(userid, thread, author, text);
     }
 
+    public String getUserIconURL(String id) {
+
+        class DownloadJSON extends AsyncTask<String, Void, String> {
+
+            public DownloadJSON() {
+                super();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(String... strings) {
+                try{
+                    URL url = new URL("http://classnoteutil.000webhostapp.com/get_user_icon.php?id="+strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    return rd.readLine();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                try {
+//                    System.out.println(s);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        DownloadJSON d = new DownloadJSON();
+        return d.doInBackground(id);
+    }
+
+    public void updateUserIcon(String id, String file_short) {
+
+        class DownloadJSON extends AsyncTask<String, Void, String> {
+
+            public DownloadJSON() {
+                super();
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(String... strings) {
+                try{
+                    URL url = new URL("http://classnoteutil.000webhostapp.com/update_user_icon.php?id="+strings[0]+"&file_short="+strings[1]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    return "success";
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    return "failure";
+                }
+            }
+        }
+        DownloadJSON d = new DownloadJSON();
+        d.doInBackground(id, file_short);
+    }
 }

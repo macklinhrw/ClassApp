@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ClassNote.blank_app.R;
+import com.ClassNote.blank_app.data.ConnectMySQL2;
 import com.ClassNote.blank_app.data.MessageClass;
 import com.squareup.picasso.Picasso;
 
@@ -60,40 +61,22 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         messageTextView.setText(ms.getText());
         messageTextView.setMaxWidth(800);
 
-//        Picasso.get().
-//                load("http://classnoteutil.000webhostapp.com/get_user_icon.php?id="+ms.getSender())
-//                .resize(40,40)
-//                .into(profileImageView);
+        ConnectMySQL2 c = new ConnectMySQL2();
+        String image_url = c.getUserIconURL(ms.getSender());
+        Picasso.get().
+                load(image_url)
+                .resize(40,40)
+                .into(profileImageView);
 
-//        Picasso.Builder builder = new Picasso.Builder(holder.view.getContext());
-//        builder.listener(new Picasso.Listener()
-//        {
-//            @Override
-//            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
-//            {
-//                exception.printStackTrace();
-//            }
-//        });
-
-//        if(!ms.getAuthor().equals("Macklin")){
-//            builder.build().load("https://cdn.discordapp.com/avatars/262322723923951627/aa8d6e478700a59b769ad21e3f6864a1.png?size=128")
-//                    .resize(40,40)
-//                    .centerCrop()
-//                    .transform(new CropCircleTransformation())
-//                    .into(profileImageView);
-//        } else {
-//            builder.build().load("https://cdn.discordapp.com/avatars/279761194024435714/c2103e7c7620928ce48b0fae72f17580.png?size=128")
-//                    .resize(40,40)
-//                    .centerCrop()
-//                    .transform(new CropCircleTransformation())
-//                    .into(profileImageView);
-//        }
-
-
-
-//        Log.i("image", "http://classnoteutil.000webhostapp.com/get_user_icon.php?id="+ms.getSender());
-
-        //http://classnoteutil.000webhostapp.com/get_user_icon.php?id=U#########
+        Picasso.Builder builder = new Picasso.Builder(holder.view.getContext());
+        builder.listener(new Picasso.Listener()
+        {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+            {
+                exception.printStackTrace();
+            }
+        });
 
         // formats
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
