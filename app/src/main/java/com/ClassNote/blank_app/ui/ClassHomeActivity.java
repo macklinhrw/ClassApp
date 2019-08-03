@@ -39,20 +39,21 @@ public class ClassHomeActivity extends AppCompatActivity {
         final Button docBtn = findViewById(R.id.classdocsbutton2);
         final Button calBtn = findViewById(R.id.classcalendarbutton2);
 
-//        int pos = getIntent().getExtras().getInt(Path.ACTIVE_CLASS.str);
-//
-//        layoutManager = new LinearLayoutManager(this);
-//        List<SchoolClass> sc = activeUser.fetchClasses();
-//        SchoolClass c = null;
-//        if(sc != null){
-//            c = sc.get(pos);
-//        }
-//        if(c != null){
-//            titletext.setText(c.getName());
-//            String tp = c.getTeacher()+" - "+c.getPeriod();
-//            teacherperiod.setText(tp);
-//            description.setText(c.getDescription());
-//        }
+        User activeUser = getIntent().getExtras().getParcelable(Path.ACTIVE_USER.str);
+        int pos = getIntent().getExtras().getInt(Path.ACTIVE_CLASS.str);
+
+        layoutManager = new LinearLayoutManager(this);
+        List<SchoolClass> sc = activeUser.fetchClasses();
+        SchoolClass c = null;
+        if(sc != null){
+            c = sc.get(pos);
+        }
+        if(c != null){
+            titletext.setText(c.getName());
+            String tp = c.getTeacher()+" - "+c.getPeriod();
+            teacherperiod.setText(tp);
+            description.setText(c.getDescription());
+        }
 
         threadsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
