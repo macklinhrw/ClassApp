@@ -11,8 +11,8 @@ import java.io.File;
 public class UploadImage {
 
     public void UploadImage(String filePath, String user_id) {
-        String MY_ACCESS_KEY_ID = "AKIA2I5IBE5MYN6I2I6D";
-        String MY_SECRET_KEY = "1FnJYM+KOrmU6Z51HNfGzYP1GkFmZGfvjZRpQJIz";
+        String MY_ACCESS_KEY_ID = "PLACEHOLDER";
+        String MY_SECRET_KEY = "PLACEHOLDER";
         AmazonS3Client s3Client =   new AmazonS3Client( new BasicAWSCredentials(MY_ACCESS_KEY_ID, MY_SECRET_KEY));
         final String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
         final int N = alphabet.length();
