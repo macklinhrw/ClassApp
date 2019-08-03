@@ -97,7 +97,7 @@ public class MessagesActivity extends AppCompatActivity {
 
                 //Log.i("msg", date);
 
-                c.sendMessage(activeUser.getId(), tc.getId(), activeUser.getName(), sendMessageTextView.getText().toString());
+                c.sendMessage(activeUser.getId(), tc.getId(), activeUser.getUsername(), sendMessageTextView.getText().toString());
                 //mAdapter.notifyItemInserted(messages.size() - 1);
                 //mAdapter.notifyDataSetChanged();
                 messagesRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
