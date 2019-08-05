@@ -3,31 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".ui.ClassHomeActivity">
 
     <TextView
-        android:id="@+id/classNameTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/classhome_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="Title"
+        android:textSize="48sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/threadsRecyclerView"
+    <TextView
+        android:id="@+id/teacherperiod"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-27dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/classhome_title"
+        android:gravity="center"
+        android:text="Teacher - Period"
+        android:textSize="30sp" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/classdescription"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_panel"/>
+        android:layout_height="500dp"
+        android:layout_below="@id/teacherperiod"
+        android:editable="false"
+        android:paddingLeft="80px"
+        android:paddingTop="20px"
+        android:paddingRight="50px"
+        android:paddingBottom="20px"
+        android:text="Description and Announcements"
+        android:textSize="20sp" />
 
     <LinearLayout
-        android:id="@+id/bottom_panel"
+        android:id="@+id/bottom_panel2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -36,7 +48,7 @@
         style="?android:attr/buttonBarStyle">
 
         <Button
-            android:id="@+id/classhomebutton"
+            android:id="@+id/classhomebutton2"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,7 +56,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classthreadsbutton"
+            android:id="@+id/classthreadsbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +64,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classdocsbutton"
+            android:id="@+id/classdocsbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -60,7 +72,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classcalendarbutton"
+            android:id="@+id/classcalendarbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"

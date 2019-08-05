@@ -2,6 +2,7 @@ package com.ClassNote.blank_app.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ClassNote.blank_app.R;
+import com.ClassNote.blank_app.data.ConnectMySQL2;
 import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.data.ThreadClass;
 import com.ClassNote.blank_app.data.User;
 import com.ClassNote.blank_app.ui.MessagesActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,7 +56,7 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.MyViewHold
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(holder.view.getContext(), String.valueOf(t.getId()), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(holder.view.getContext(), String.valueOf(t.getId()), Toast.LENGTH_SHORT).show();
                 Log.i("toast", t.getId());
 
                 Intent startIntent = new Intent(holder.view.getContext(), MessagesActivity.class);

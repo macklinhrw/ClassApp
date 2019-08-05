@@ -10,53 +10,49 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ClassNote.blank_app.R;
-import com.ClassNote.blank_app.adapters.ThreadAdapter;
 import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.data.SchoolClass;
-import com.ClassNote.blank_app.data.ThreadClass;
 import com.ClassNote.blank_app.data.User;
 
-import java.util.ArrayList;
+import android.widget.*;
 import java.util.List;
 
-public class ClassActivity extends AppCompatActivity {
+public class ClassHomeActivity extends AppCompatActivity {
 
-    private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class);
+        setContentView(R.layout.activity_classhome);
 
-        final RecyclerView threadsRecyclerView = findViewById(R.id.threadsRecyclerView);
-        final Button homeBtn = findViewById(R.id.classhomebutton);
-        final Button docBtn = findViewById(R.id.classdocsbutton);
-        final Button calBtn = findViewById(R.id.classcalendarbutton);
+        final TextView titletext = findViewById(R.id.classhome_title);
+        final TextView teacherperiod = findViewById(R.id.teacherperiod);
+        final TextView description = findViewById(R.id.classdescription);
+        final Button threadsBtn = findViewById(R.id.classthreadsbutton2);
+        final Button docBtn = findViewById(R.id.classdocsbutton2);
+        final Button calBtn = findViewById(R.id.classcalendarbutton2);
 
         User activeUser = getIntent().getExtras().getParcelable(Path.ACTIVE_USER.str);
         int pos = getIntent().getExtras().getInt(Path.ACTIVE_CLASS.str);
 
-        threadsRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        threadsRecyclerView.setLayoutManager(layoutManager);
         List<SchoolClass> sc = activeUser.fetchClasses();
         SchoolClass c = null;
         if(sc != null){
             c = sc.get(pos);
         }
-        if( c != null && c.getThreads() == null){
-            mAdapter = new ThreadAdapter(new ArrayList<>(), activeUser);
-            threadsRecyclerView.setAdapter(mAdapter);
-        } else {
-            mAdapter = new ThreadAdapter(c.getThreads(), activeUser);
-            threadsRecyclerView.setAdapter(mAdapter);
+        if(c != null){
+            titletext.setText(c.getName());
+            String tp = c.getTeacher()+" - "+c.getPeriod();
+            teacherperiod.setText(tp);
+            description.setText(c.getDescription());
         }
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
+        threadsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(getApplicationContext(), ClassHomeActivity.class);
+                Intent startIntent = new Intent(getApplicationContext(), ClassActivity.class);
                 startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                 startIntent.putExtra(Path.ACTIVE_CLASS.str, pos);
                 startActivity(startIntent);
@@ -85,3 +81,4 @@ public class ClassActivity extends AppCompatActivity {
 //        });
     }
 }
+
