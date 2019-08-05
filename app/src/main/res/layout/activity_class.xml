@@ -27,7 +27,7 @@
         android:layout_above="@+id/bottom_panel"/>
 
     <LinearLayout
-        android:id="@+id/bottom_panel2"
+        android:id="@+id/bottom_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -36,7 +36,7 @@
         style="?android:attr/buttonBarStyle">
 
         <Button
-            android:id="@+id/classhomebutton2"
+            android:id="@+id/classhomebutton"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,7 +44,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classthreadsbutton2"
+            android:id="@+id/classthreadsbutton"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classdocsbutton2"
+            android:id="@+id/classdocsbutton"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -60,7 +60,7 @@
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classcalendarbutton2"
+            android:id="@+id/classcalendarbutton"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
