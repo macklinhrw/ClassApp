@@ -27,39 +27,45 @@
         android:layout_above="@+id/bottom_panel"/>
 
     <LinearLayout
-        android:id="@+id/bottom_panel"
+        android:id="@+id/bottom_panel2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle">
 
         <Button
-            android:id="@+id/classhomebutton"
+            android:id="@+id/classhomebutton2"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Home" />
+            android:text="Home"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classthreadsbutton"
+            android:id="@+id/classthreadsbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Threads" />
+            android:text="Threads"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classdocsbutton"
+            android:id="@+id/classdocsbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Docs" />
+            android:text="Docs"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/classcalendarbutton"
+            android:id="@+id/classcalendarbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Calendar" />
+            android:text="Calendar"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
 </RelativeLayout>

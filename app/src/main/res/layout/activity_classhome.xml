@@ -44,35 +44,40 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle">
 
         <Button
             android:id="@+id/classhomebutton2"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Home" />
+            android:text="Home"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/classthreadsbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Threads" />
+            android:text="Threads"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/classdocsbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Docs" />
+            android:text="Docs"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/classcalendarbutton2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Calendar" />
+            android:text="Calendar"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
 </RelativeLayout>
