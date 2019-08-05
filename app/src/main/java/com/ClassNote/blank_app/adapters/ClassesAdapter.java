@@ -16,7 +16,7 @@ import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.Path;
 import com.ClassNote.blank_app.data.SchoolClass;
 import com.ClassNote.blank_app.data.User;
-import com.ClassNote.blank_app.ui.ClassActivity;
+import com.ClassNote.blank_app.ui.ClassHomeActivity;
 
 import java.util.List;
 
@@ -63,8 +63,8 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.MyViewHo
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(holder.view.getContext(), curClass.getDescription(), Toast.LENGTH_SHORT).show();
-                Intent startIntent = new Intent(holder.view.getContext(), ClassActivity.class);
+//                Toast.makeText(holder.view.getContext(), curClass.getDescription(), Toast.LENGTH_SHORT).show();
+                Intent startIntent = new Intent(holder.view.getContext(), ClassHomeActivity.class);
                 startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
                 startIntent.putExtra(Path.ACTIVE_CLASS.str, position);
                 holder.view.getContext().startActivity(startIntent);

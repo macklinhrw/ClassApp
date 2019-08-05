@@ -17,12 +17,6 @@ import com.ClassNote.blank_app.data.User;
 import android.widget.*;
 import java.util.List;
 
-// FIXME this crashes the app!!
-// FIXME this crashes the app!!
-// FIXME this crashes the app!!
-// FIXME this crashes the app!!
-// FIXME this crashes the app!!
-
 public class ClassHomeActivity extends AppCompatActivity {
 
     private RecyclerView.LayoutManager layoutManager;
@@ -59,12 +53,14 @@ public class ClassHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(), ClassActivity.class);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
+                startIntent.putExtra(Path.ACTIVE_CLASS.str, pos);
                 startActivity(startIntent);
                 finish();
             }
         });
 
-        // TODO make ClassHomeActivity connect to this
+        // TODO make ClassDocsActivity connect to this
 //        docBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -74,7 +70,7 @@ public class ClassHomeActivity extends AppCompatActivity {
 //            }
 //        });
 
-        // TODO make ClassHomeActivity connect to this
+        // TODO make ClassCalendarActivity connect to this
 //        calBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

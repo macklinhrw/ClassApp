@@ -68,7 +68,7 @@ public class MessagesActivity extends AppCompatActivity {
         mAdapter = new MessagesAdapter(localMessages);
         messagesRecyclerView.setAdapter(mAdapter);
 
-        //Log.i("msg", "here4");
+        //Log.i("msg", "here4");k
         loading.setVisibility(View.VISIBLE);
 
         model.getMessages().observe(this, new Observer<List<MessageClass>>() {
