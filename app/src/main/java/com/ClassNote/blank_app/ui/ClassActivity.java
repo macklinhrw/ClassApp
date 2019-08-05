@@ -53,18 +53,18 @@ public class ClassActivity extends AppCompatActivity {
             threadsRecyclerView.setAdapter(mAdapter);
         }
 
-        // FIXME this crashes the app!!
-//         TODO make ClassHomeActivity connect to this
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent startIntent = new Intent(getApplicationContext(), ClassHomeActivity.class);
+                startIntent.putExtra(Path.ACTIVE_USER.str, activeUser);
+                startIntent.putExtra(Path.ACTIVE_CLASS.str, pos);
                 startActivity(startIntent);
                 finish();
             }
         });
 
-        // TODO make ClassHomeActivity connect to this
+        // TODO make ClassDocsActivity connect to this
 //        docBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -74,7 +74,7 @@ public class ClassActivity extends AppCompatActivity {
 //            }
 //        });
 
-        // TODO make ClassHomeActivity connect to this
+        // TODO make ClassCalendarActivity connect to this
 //        calBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
