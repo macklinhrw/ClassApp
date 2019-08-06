@@ -24,7 +24,6 @@ public class ConnectMessages {
     private String thread;
     private String time;
     private boolean finishTask;
-    private long lasttime;
 
     public void updateNewMessages(List<MessageClass> result) {
         if(result != null){

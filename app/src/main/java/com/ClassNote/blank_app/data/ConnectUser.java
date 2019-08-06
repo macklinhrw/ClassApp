@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConnectUser implements AsyncResponse<String> {
+public class ConnectUser {
 
     private LoginViewModel viewModel;
 
@@ -21,7 +21,6 @@ public class ConnectUser implements AsyncResponse<String> {
         l.execute(username, password);
     }
 
-    @Override
     public void processFinish(String result) {
         viewModel.setLoginResult(result);
     }

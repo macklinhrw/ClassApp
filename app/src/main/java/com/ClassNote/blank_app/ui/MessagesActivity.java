@@ -5,9 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
@@ -15,21 +13,14 @@ import android.widget.ProgressBar;
 
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.adapters.MessagesAdapter;
-import com.ClassNote.blank_app.adapters.ThreadAdapter;
 import com.ClassNote.blank_app.data.ConnectMySQL2;
-import com.ClassNote.blank_app.data.FormattedDate;
+import com.ClassNote.blank_app.utilities.FormattedDate;
 import com.ClassNote.blank_app.data.MessageClass;
-import com.ClassNote.blank_app.data.Path;
-import com.ClassNote.blank_app.data.SchoolClass;
+import com.ClassNote.blank_app.utilities.Path;
 import com.ClassNote.blank_app.data.ThreadClass;
 import com.ClassNote.blank_app.data.User;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class MessagesActivity extends AppCompatActivity {
 

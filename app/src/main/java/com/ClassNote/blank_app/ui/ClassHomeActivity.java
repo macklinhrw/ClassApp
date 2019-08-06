@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ClassNote.blank_app.R;
-import com.ClassNote.blank_app.data.Path;
+import com.ClassNote.blank_app.utilities.Path;
 import com.ClassNote.blank_app.data.SchoolClass;
 import com.ClassNote.blank_app.data.User;
 

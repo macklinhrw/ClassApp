@@ -1,9 +1,6 @@
 package com.ClassNote.blank_app.data;
 
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
+import com.ClassNote.blank_app.utilities.FormattedDate;
 
 public class MessageClass {
 

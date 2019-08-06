@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import com.ClassNote.blank_app.data.ConnectUser;
-import com.ClassNote.blank_app.data.Path;
+import com.ClassNote.blank_app.utilities.Path;
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.User;
 

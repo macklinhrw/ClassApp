@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ClassNote.blank_app.adapters.ClassesAdapter;
-import com.ClassNote.blank_app.data.Path;
+import com.ClassNote.blank_app.utilities.Path;
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.SchoolClass;
 import com.ClassNote.blank_app.data.User;

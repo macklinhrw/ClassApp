@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ClassNote.blank_app.data.ConnectMySQL;
-import com.ClassNote.blank_app.data.Path;
+import com.ClassNote.blank_app.utilities.Path;
 import com.ClassNote.blank_app.R;
 import com.ClassNote.blank_app.data.User;
 
